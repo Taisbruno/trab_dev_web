@@ -36,7 +36,9 @@ public class MedicoController extends HttpServlet {
                 medicos = medicoDAO.getAll();
                 request.setAttribute("medicos", medicos);
                 RequestDispatcher list = getServletContext().getRequestDispatcher("/formEditarConsulta.jsp");
+                RequestDispatcher listt = getServletContext().getRequestDispatcher("/formRealizarConsulta.jsp");
                 list.forward(request, response);
+                listt.forward(request, response);
                 
                 break;
             case "insert":
@@ -55,7 +57,7 @@ public class MedicoController extends HttpServlet {
                 medico = medicoDAO.get(medicoId);
                 
                 request.setAttribute("medico", medico);
-                RequestDispatcher update = getServletContext().getRequestDispatcher("/updateUsuario.jsp");
+                RequestDispatcher update = getServletContext().getRequestDispatcher("/updateMedico.jsp");
                 update.forward(request, response);
                 
                 break;
@@ -111,7 +113,7 @@ public class MedicoController extends HttpServlet {
             medicos = medicoDAO.getAll();
             
             request.setAttribute("medicos", medicos);
-            RequestDispatcher list = getServletContext().getRequestDispatcher("/formEditarConsulta.jsp");
+            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
             list.forward(request, response);
         }
     }

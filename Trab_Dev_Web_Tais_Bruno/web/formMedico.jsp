@@ -26,7 +26,7 @@
         <br>
         <div class="form-group">
             <label for="crm"><b> CRM </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="int" class="form-control" name="crm" id="crm" autocomplete="off" placeholder="Digite o CRM" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="number" class="form-control" name="crm" id="crm" autocomplete="off" placeholder="Digite o CRM" required>
         </div>
         <br>
         <div class="form-group">

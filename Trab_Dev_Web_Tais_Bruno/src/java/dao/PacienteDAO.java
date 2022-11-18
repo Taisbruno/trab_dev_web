@@ -88,11 +88,6 @@ public class PacienteDAO extends HttpServlet {
     
     public boolean insert(Paciente paciente) {
         try {
-            if (get(paciente.getCpf()).getCpf() != null) {
-                System.out.println("SQL Error: Invalid CPF");
-                return false;
-            }
-            
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
                 this.tableName + " (cpf, senha, nome, autorizado, idtipoplano) VALUES (?,?,?,?,?)");
             

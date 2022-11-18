@@ -12,10 +12,14 @@ import models.Consulta;
 import dao.ConsultaDAO;
 import dao.PacienteDAO;
 import dao.MedicoDAO;
+import dao.ExameDAO;
+import dao.TipoExameDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Paciente;
+import models.Exames;
+import models.TipoExame;
 import models.Medico;
 import utils.Date;
 
@@ -28,6 +32,9 @@ public class ListaConsultaMedicoController extends HttpServlet {
         
         ConsultaDAO consultaDAO = new ConsultaDAO();
         ArrayList<Consulta> consultas;
+        ArrayList<Exames> exames;
+        ExameDAO exameDAO = new ExameDAO();
+        Exames exame = new Exames();
         Consulta consulta = new Consulta();
         int consultaId;
         
@@ -36,8 +43,10 @@ public class ListaConsultaMedicoController extends HttpServlet {
         switch (action) {
             case "get":
                 consultaId = Integer.parseInt(request.getParameter("id"));
+                exames = exameDAO.getByConsulta(consultaId);
                 consultas = consultaDAO.getByMedico(consultaId);
                 request.setAttribute("consultasMedico", consultas);
+                request.setAttribute("examesConsulta", exames);
                 RequestDispatcher get = getServletContext().getRequestDispatcher("/listaConsultasMedico.jsp");
                 get.forward(request, response);
                 
@@ -85,6 +94,7 @@ public class ListaConsultaMedicoController extends HttpServlet {
         ConsultaDAO consultaDAO = new ConsultaDAO();
         request.setCharacterEncoding("UTF-8");
         String message = "";
+        int consultaId = Integer.parseInt(request.getParameter("id"));
         
         try {
             Consulta consulta = new Consulta();

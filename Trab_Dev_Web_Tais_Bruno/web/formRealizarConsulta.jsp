@@ -9,17 +9,15 @@
 <%@page import="models.Consulta"%>
 <%@page import="models.Especialidade"%>
 <%@page import="dao.EspecialidadeDAO"%>
-<%@page import="dao.ExameDAO"%>
-<%@page import="dao.TipoExameDAO"%>
 <%@page import="models.TipoExame"%>
+<%@page import="dao.TipoExameDAO"%>
 <%@page import="models.Exames"%>
+<%@page import="dao.ExameDAO"%>
 
-<%  
+<%
     Consulta consulta = (Consulta) request.getAttribute("consultasMedico");
     PacienteDAO pacienteDAO = new PacienteDAO();
     ArrayList<Paciente> pacientes = pacienteDAO.getAll();
-    ExameDAO exameDAO = new ExameDAO();
-    ArrayList<Exames> exames = exameDAO.getByConsulta(consulta.getId());
     MedicoDAO medicoDAO = new MedicoDAO();
     ArrayList<Medico> medicos = medicoDAO.getAll();
     TipoExameDAO tipoexameDAO = new TipoExameDAO();
@@ -34,51 +32,27 @@
 
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-        <title> Alteração de Consulta </title>
+        <title> Realização da Consulta </title>
     </head>
 <body>        
     <jsp:include page = "components/menu.jsp" />
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-        <h4 class="card-title" style="margin-top: 40px">Editar Consulta:</h4>
+        <h4 class="card-title" style="margin-top: 40px">Realizar Consulta:</h4>
         <br>
              
-     <form method="POST" action="EditarConsultaController">   
+     <form method="POST" action="RealizarConsultaController">   
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
         <div class="form-group">
-            <label for="nomemedico"> Nome do Médico </label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idmedico" name="idmedico">
-                <%  
-                    for (int index = 0; index < medicos.size(); index++) {
-                        Medico medicoo = medicos.get(index);
-
-                %>        
-
-                <option value="<%= medicoo.getId() %>"><%= medicoo.getNome() + " - " + medicoo.getNomeEspecialidade(medicoo.getIdEspecialidade()) %></option>
-                <%
-                    }
-                %>
-            </select>
+            <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idmedico" id="idmedico" value="<%= consulta.getIdMedico() %>">
         </div>
         <br> 
         <div class="form-group">
-        <label for="nomepaciente"> Nome do Paciente </label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idpaciente" name="idpaciente">
-                <%
-                    for (int indexx = 0; indexx < pacientes.size(); indexx++) {
-                        Paciente paciente = pacientes.get(indexx);    
-                        
-                %>
-                <option value="<%= paciente.getId() %>"><%= paciente.getNome() %></option>
-                <%
-                    }
-                %>
-            </select>
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" value="<%= consulta.getIdPaciente() %>">
         </div>
         <br>
         <div class="form-group">
-            <label for="data"> Data: </label>    
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="data" id="data" value="<%= consulta.getData() %>">
+            <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>" >
         </div>
         <br>
         <div class="form-group">
@@ -89,13 +63,7 @@
         <div class="form-group">
             <label for="exame"><b> Exames </b></label>
             <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idtipoexame"  name="idtipoexame"> 
-                <% 
-                    for (Exames exame: exames) {
-                %>
-                <option value="<%= exame.getIdTipoExame() %>" selected disabled><%= exame.getDescricaoTipoExame() %></option>
-                <%
-                    }
-                %>
+                <option value="" disabled selected> </option>
                 <%
                     for (int indexxx = 0; indexxx < tipoexames.size(); indexxx++) {
                         TipoExame tipoexame = tipoexames.get(indexxx);           
@@ -109,9 +77,9 @@
         <br>
         <div class="form-group">
             <label for="realizada"><b> Consulta Realizada? </b></label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="realizada"  name="realizada" required>                       
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="realizada"  name="realizada">                       
                 <option value="N" disabled> Não </option>
-                <option value="S"> Sim </option> 
+                <option value="S" selected> Sim </option> 
             </select>
         </div>
             
@@ -123,5 +91,6 @@
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 
 

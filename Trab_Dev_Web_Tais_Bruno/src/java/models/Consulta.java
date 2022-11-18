@@ -1,5 +1,8 @@
 package models;
 
+import dao.ExameDAO;
+import java.util.List;
+
 public class Consulta {
     private int id;
     private String data;
@@ -67,6 +70,17 @@ public class Consulta {
 
     public void setIdPaciente(int idpaciente) {
         this.idpaciente = idpaciente;
+    }
+    
+    public String getExames(){
+        ExameDAO exameDAO = new ExameDAO();
+        List<Exames> exames = exameDAO.ListaExames();
+        for(Exames exame : exames){
+            if(exame.getIdConsulta() == this.id){
+                return exame.getDescricaoTipoExame();
+            }
+        }
+        return "";
     }
     
 }

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import connection.Database;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Medico;
 
 @WebServlet(name = "MedicoDAO", urlPatterns = {"/MedicoDAO"})
@@ -104,6 +102,7 @@ public class MedicoDAO extends HttpServlet {
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
                 this.tableName + " (nome, crm, estadocrm, cpf, senha, autorizado, idespecialidade) VALUES (?,?,?,?,?,?,?)");
             
+            preparedStatement.setString(1, medico.getNome());
             preparedStatement.setInt(2, Integer.valueOf(medico.getCrm()));
             preparedStatement.setString(3, medico.getEstadoCrm());
             preparedStatement.setString(4, medico.getCpf());
@@ -114,6 +113,28 @@ public class MedicoDAO extends HttpServlet {
             
             return true;
             
+        } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public boolean update(Medico medico) {
+        
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE " + this.tableName + 
+                    " SET nome=?, crm=?, estadocrm=?, cpf=?, senha=?, autorizado=?, idespecialidade=? WHERE id=?");
+            
+            preparedStatement.setString(1, medico.getNome());
+            preparedStatement.setInt(2, medico.getCrm());
+            preparedStatement.setString(3, medico.getEstadoCrm());
+            preparedStatement.setString(4, medico.getCpf());
+            preparedStatement.setString(5, medico.getSenha());
+            preparedStatement.setString(6, medico.getAutorizado());
+            preparedStatement.setInt(7, medico.getIdEspecialidade());
+            preparedStatement.executeUpdate();
+            
+            return true;
         } catch(SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
             return false;

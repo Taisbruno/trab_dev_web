@@ -95,11 +95,11 @@ public class Medico {
         EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO(); 
         ArrayList<Especialidade> especialidades = especialidadeDAO.getAll();
         for(Especialidade especialidade : especialidades){
-            if(especialidade.getId()==idespecialidade) {
+            if(especialidade.getId() == idespecialidade) {
                 return especialidade.getDescricao();
             }
         }
-        return null;
+        return "";
     }
     
 }

@@ -11,11 +11,9 @@
 <%@page import="dao.EspecialidadeDAO"%>
 
 <%
-    PacienteDAO pacienteDAO = new PacienteDAO();
-    ArrayList<Paciente> pacientes = pacienteDAO.getAll();
+    Paciente paciente = (Paciente) session.getAttribute("paciente");
     MedicoDAO medicoDAO = new MedicoDAO();
     ArrayList<Medico> medicos = medicoDAO.getAll();
-    ConsultaDAO consultaDAO = new ConsultaDAO();
     EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
     ArrayList<Especialidade> especialidades = especialidadeDAO.getAll();
 %>
@@ -42,7 +40,7 @@
             
         <div class="form-group">
             <label for="nomemedico"> Nome do Médico </label>
-            <select class="form-select d-block w-100 form-control" id="idmedico" name="idmedico" required>
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="idmedico" name="idmedico" required>
                 <option value="" disabled>Nome do Médico</option>
                 <%
                     for (int index = 0; index < medicos.size(); index++) {
@@ -57,20 +55,9 @@
                 %>
 
             </select>
-   
         <br> 
-        <%
-                    for (int indexx = 0; indexx < pacientes.size(); indexx++) {
-                        Paciente paciente = pacientes.get(indexx);
-                    
-        %>
-        <div class="form-group">
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" autocomplete="off" type="hidden" placeholder="Digite o nome do paciente" value="<%= paciente.getId()%>">
-        </div>
-            <%
-                }
-            %>
-        <br>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" type="hidden" value="<%= paciente.getId()%>">
+
         <div class="form-group">
             <label for="data"> Selecione a data </label>         
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="date" class="form-control" name="data" id="data" required>
@@ -81,11 +68,7 @@
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="time" class="form-control" name="hora" id="hora" required>
         </div>
         <br>
-        <div class="form-group">
-            <label for="descricao"> Descrição </label>
-            <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" required>
-        </div>
-        <br>
+            <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="descricao" id="descricao" value = " ">
         <div class="form-group">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="realizada" value = "N" id="realizada" >
         </div>

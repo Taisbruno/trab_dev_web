@@ -9,16 +9,21 @@
 <%@page import="models.Consulta"%>
 <%@page import="models.Especialidade"%>
 <%@page import="dao.EspecialidadeDAO"%>
+<%@page import="dao.ExameDAO"%>
+<%@page import="dao.TipoExameDAO"%>
+<%@page import="models.TipoExame"%>
+<%@page import="models.Exames"%>
 
-<%
-    Medico medico = (Medico) session.getAttribute("medicos");
+<%  
     Consulta consulta = (Consulta) request.getAttribute("consultasMedico");
     PacienteDAO pacienteDAO = new PacienteDAO();
     ArrayList<Paciente> pacientes = pacienteDAO.getAll();
+    ExameDAO exameDAO = new ExameDAO();
+    ArrayList<Exames> exames = exameDAO.getByConsulta(consulta.getId());
     MedicoDAO medicoDAO = new MedicoDAO();
     ArrayList<Medico> medicos = medicoDAO.getAll();
-    ConsultaDAO consultaDAO = new ConsultaDAO();
-    ArrayList<Consulta> consultas = consultaDAO.getAll();
+    TipoExameDAO tipoexameDAO = new TipoExameDAO();
+    ArrayList<TipoExame> tipoexames = tipoexameDAO.getAll();
 %>
 
 <html lang="pt-BR">
@@ -72,13 +77,34 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="data"> Selecione a data </label>    
+            <label for="data"> Data: </label>    
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="data" id="data" value="<%= consulta.getData() %>">
         </div>
         <br>
         <div class="form-group">
             <label for="descricao"> Descrição </label>
             <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="exame"><b> Exames </b></label>
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idtipoexame"  name="idtipoexame"> 
+                <% 
+                    for (Exames exame: exames) {
+                %>
+                <option value="<%= exame.getIdTipoExame() %>" selected disabled><%= exame.getDescricaoTipoExame() %></option>
+                <%
+                    }
+                %>
+                <%
+                    for (int indexxx = 0; indexxx < tipoexames.size(); indexxx++) {
+                        TipoExame tipoexame = tipoexames.get(indexxx);           
+                %>
+                <option value="<%= tipoexame.getId() %>"><%= tipoexame.getDescricao() %></option>
+                <%
+                    }
+                %>
+            </select>
         </div>
         <br>
         <div class="form-group">

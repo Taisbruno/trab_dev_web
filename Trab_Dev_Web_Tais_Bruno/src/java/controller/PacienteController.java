@@ -28,41 +28,7 @@ public class PacienteController extends HttpServlet {
             PacienteDAO pacienteDAO = new PacienteDAO();
             ArrayList<Paciente> pacientes;
             Paciente paciente = new Paciente();
-            int pacienteId;
-            
-            String action = (String) request.getParameter("action");
-            
-            switch (action) {
-                case "all":
-                    pacientes = pacienteDAO.getAll();
-                    request.setAttribute("pacientes", pacientes);
-                    RequestDispatcher list = getServletContext().getRequestDispatcher("/formEditarConsulta.jsp");
-                    list.forward(request, response);
-                    
-                    break;
-                case "insert":
-                    paciente.setId(0);
-                    paciente.setNome("");
-                    paciente.setCpf("");
-                    paciente.setSenha("");
-                    paciente.setAutorizado("");
-                    paciente.setIdTipoPlano(0);
-                    
-                    request.setAttribute("paciente", paciente);
-                    RequestDispatcher insert = getServletContext().getRequestDispatcher("/formPaciente.jsp");
-                    insert.forward(request, response);
-                    
-                    break;
-                case "update":
-                    pacienteId = Integer.parseInt(request.getParameter("id"));
-                    paciente = pacienteDAO.get(pacienteId);
-                    
-                    request.setAttribute("paciente", paciente);
-                    RequestDispatcher update = getServletContext().getRequestDispatcher("/updateUsuario.jsp");
-                    update.forward(request, response);
-                    
-                    break;   
-            }
+           
         } catch (SQLException ex) {
             Logger.getLogger(PacienteController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -91,31 +57,22 @@ public class PacienteController extends HttpServlet {
         try {
             pacienteDAO.insert(paciente);
         } catch (Exception e) {
-            throw new RuntimeException("Falha");
+            throw new RuntimeException("Falha na inserção do paciente");
         } finally {
-        
-        ArrayList<Paciente> pacientes;
-        pacientes = pacienteDAO.getAll();
+            ArrayList<Paciente> pacientes;
+            pacientes = pacienteDAO.getAll();
             
-        request.setAttribute("pacientes", pacientes);
-        RequestDispatcher list = getServletContext().getRequestDispatcher("/formEditarConsulta.jsp");
-        list.forward(request, response);
-        }
-
         if (paciente != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("paciente", paciente);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
-            rd.forward(request, response);
-            return;
+            request.setAttribute("pacientes", pacientes);
+            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
+            list.forward(request, response);
 
         } else {
             request.setAttribute("msgError", "Erro");
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/formPaciente.jsp");
             rd.forward(request, response);
-            return;
         }
-          
+        }        
     }
 }
 
