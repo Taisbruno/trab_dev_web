@@ -23,13 +23,13 @@
         <!-- CPF -->
         <div class="form-group">
             <label for="cpf" style="margin-top: 5px"><b> CPF </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" style="margin-top: 5px" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center; margin-top: 5px" type="text" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
         </div>
         <br>
         <!-- SENHA -->
         <div class="form-group">
             <label for="senha" style="margin-top: 10px"><b> Senha </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="password" style="margin-top: 10px" class="form-control" name="senha" id="senha" autocomplete="off" placeholder="Digite a senha" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center; margin-top: 10px" type="password" class="form-control" name="senha" id="senha" autocomplete="off" placeholder="Digite a senha" required>
         </div>
         <br>
         <!-- BOTÃO -->

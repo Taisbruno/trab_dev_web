@@ -46,7 +46,6 @@
                     for (int index = 0; index < medicos.size(); index++) {
                         Medico medico = medicos.get(index);
                         Especialidade especialidade = especialidades.get(index);
-                        
                 %>
 
                 <option value="<%= medico.getId() %>"><%= medico.getNome() + " - " + especialidade.getDescricao() %></option>

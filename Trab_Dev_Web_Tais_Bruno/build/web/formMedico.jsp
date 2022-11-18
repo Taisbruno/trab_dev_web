@@ -77,7 +77,7 @@
         <br>
         <div class="form-group">
             <label for="cpf"><b> CPF </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="int" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="number" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
         </div>
         <br>
         <div class="form-group">

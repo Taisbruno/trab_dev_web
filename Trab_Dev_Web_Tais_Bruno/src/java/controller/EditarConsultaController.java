@@ -11,16 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import models.Consulta;
 import dao.ConsultaDAO;
 import dao.ExameDAO;
-import dao.PacienteDAO;
 import dao.MedicoDAO;
-import dao.TipoExameDAO;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
 import models.Exames;
-import models.Paciente;
 import models.Medico;
 import utils.Date;
 
@@ -32,44 +26,13 @@ public class EditarConsultaController extends HttpServlet {
             throws ServletException, IOException {
         
         ConsultaDAO consultaDAO = new ConsultaDAO();
-        ArrayList<Consulta> consultas;
         Consulta consulta = new Consulta();
-        int consultaId, exameId;
+        int consultaId;
         
         String action = (String) request.getParameter("action");
         
         switch (action) {
-            case "get":
-                consultaId = Integer.parseInt(request.getParameter("id"));
-                consultas = consultaDAO.getByMedico(consultaId);
-                request.setAttribute("consultasMedico", consultas);
-                RequestDispatcher get = getServletContext().getRequestDispatcher("/listaConsultasMedico.jsp");
-                get.forward(request, response);
-                
-                break;
-                
-            case "all":
-                consultas = consultaDAO.getAll();
-                request.setAttribute("consultasMedico", consultas);
-                RequestDispatcher list = getServletContext().getRequestDispatcher("/listaConsultasMedico.jsp");
-                list.forward(request, response);
-                
-                break;
-                
-            case "insert":
-                consulta.setId(0);
-                consulta.setData("");
-                consulta.setDescricao("");
-                consulta.setRealizada("");
-                consulta.setIdMedico(0);
-                consulta.setIdPaciente(0);
-                
-                request.setAttribute("consultasMedico", consulta);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/formConsulta.jsp");
-                insert.forward(request, response);
-                
-                break;
-                
+    
             case "update":
                 consultaId = Integer.parseInt(request.getParameter("id"));
                 consulta = consultaDAO.get(consultaId);
@@ -106,40 +69,13 @@ public class EditarConsultaController extends HttpServlet {
             exameDAO.update(exame);
             
             ArrayList<Consulta> consultasmedico;
-            ArrayList<Exames> examesconsulta;
             MedicoDAO medicoDAO = new MedicoDAO();
             Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
             consultasmedico = consultaDAO.getByMedico(medico.getId());
-            examesconsulta = exameDAO.getByConsulta(consulta.getId());
             
             request.setAttribute("consultasMedico", consultasmedico);
-            request.setAttribute("examesconsulta", examesconsulta);
             RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
             list.forward(request, response);
             
         }
     }
-
-//try (PrintWriter out = response.getWriter()) {
-//            String id = request.getParameter("id");
-//            String idmedico = request.getParameter("idmedico");
-//            String idpaciente = request.getParameter("idpaciente");
-//            String data = request.getParameter("data");
-//            String descricao = request.getParameter("descricao");
-//            String idtipoexame = request.getParameter("idtipoexame");
-//            String realizada = request.getParameter("idtipoexame");
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");         
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h2> "+ id +"</h2>");
-//            out.println("<h2> "+ idmedico +"</h2>");
-//            out.println("<h2> "+ idpaciente +"</h2>");
-//            out.println("<h2> "+ data +"</h2>");
-//            out.println("<h2> "+ descricao +"</h2>");
-//            out.println("<h2> "+ idtipoexame +"</h2>");
-//            out.println("<h2> "+ realizada +"</h2>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }

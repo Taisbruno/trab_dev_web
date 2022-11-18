@@ -23,7 +23,6 @@ public class Consulta {
 
     }
 
-    
     public int getId() {
         return id;
     }

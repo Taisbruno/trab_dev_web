@@ -10,19 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Consulta;
 import dao.ConsultaDAO;
-import dao.PacienteDAO;
 import dao.MedicoDAO;
 import dao.ExameDAO;
-import dao.TipoExameDAO;
-import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.http.HttpSession;
-import models.Paciente;
 import models.Medico;
 import models.Exames;
-import models.TipoExame;
 import utils.Date;
 
 @WebServlet(name = "RealizarConsultaController", urlPatterns = {"/RealizarConsultaController"})
@@ -33,43 +26,12 @@ public class RealizarConsultaController extends HttpServlet {
             throws ServletException, IOException {
         
         ConsultaDAO consultaDAO = new ConsultaDAO();
-        ArrayList<Consulta> consultas;
         Consulta consulta = new Consulta();
         int consultaId;
         
         String action = (String) request.getParameter("action");
         
         switch (action) {
-            case "get":
-                consultaId = Integer.parseInt(request.getParameter("id"));
-                consultas = consultaDAO.getByMedico(consultaId);
-                request.setAttribute("consultasMedico", consultas);
-                RequestDispatcher get = getServletContext().getRequestDispatcher("/listaConsultasMedico.jsp");
-                get.forward(request, response);
-                
-                break;
-                
-            case "all":
-                consultas = consultaDAO.getAll();
-                request.setAttribute("consultasMedico", consultas);
-                RequestDispatcher list = getServletContext().getRequestDispatcher("/listaConsultasMedico.jsp");
-                list.forward(request, response);
-                
-                break;
-                
-            case "insert":
-                consulta.setId(0);
-                consulta.setData("");
-                consulta.setDescricao("");
-                consulta.setRealizada("");
-                consulta.setIdMedico(0);
-                consulta.setIdPaciente(0);
-                
-                request.setAttribute("consultasMedico", consulta);
-                RequestDispatcher insert = getServletContext().getRequestDispatcher("/formConsulta.jsp");
-                insert.forward(request, response);
-                
-                break;
                 
             case "update":
                 consultaId = Integer.parseInt(request.getParameter("id"));
@@ -107,14 +69,11 @@ public class RealizarConsultaController extends HttpServlet {
             exameDAO.insert(exame);
             
             ArrayList<Consulta> consultasmedico;
-            ArrayList<Exames> examesconsulta;
             MedicoDAO medicoDAO = new MedicoDAO();
             Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
-            examesconsulta = exameDAO.getByConsulta(consulta.getId());
             consultasmedico = consultaDAO.getByMedico(medico.getId());
             
             request.setAttribute("consultasMedico", consultasmedico);
-            request.setAttribute("examesconsulta", examesconsulta);
             RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
             list.forward(request, response);
             

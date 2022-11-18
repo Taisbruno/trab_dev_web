@@ -119,7 +119,6 @@ public class LoginController extends HttpServlet {
                     loginFailed.forward(request, response);
                     
                 }
-                
             }
             
         } catch(IOException | NumberFormatException | ServletException e) {

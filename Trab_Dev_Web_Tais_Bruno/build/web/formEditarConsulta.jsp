@@ -41,8 +41,8 @@
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
         <h4 class="card-title" style="margin-top: 40px">Editar Consulta:</h4>
+        <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="realizarConsulta.jsp">Voltar</a>
         <br>
-             
      <form method="POST" action="EditarConsultaController">   
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
         <div class="form-group">
@@ -67,7 +67,6 @@
                 <%
                     for (int indexx = 0; indexx < pacientes.size(); indexx++) {
                         Paciente paciente = pacientes.get(indexx);    
-                        
                 %>
                 <option value="<%= paciente.getId() %>"><%= paciente.getNome() %></option>
                 <%

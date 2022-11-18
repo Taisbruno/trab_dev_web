@@ -30,10 +30,11 @@
         
         <div class="card-title">
                 <div class="card-body" style="padding: 10%; text-align: center;">
-                    <h2 class="card-title" style="margin-top: 20px; margin-bottom: 90px; padding-bottom: 5%; text-align: center">Clínica Tais Bruno - Consultas</h2>
+                    <h2 class="card-title" style="margin-top: 20px; padding-bottom: 2%; text-align: center">Lista de Consultas</h2>
+                    <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="AreaMedico.jsp">Voltar</a>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <!-- CONTAINER NAVBAR -->
+            
             <div class="container">
                 <a class="navbar-brand" href="#"><b>Consultas</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +48,6 @@
             <%   
                 ConsultaDAO consultaDAO = new ConsultaDAO();
                 PacienteDAO pacienteDAO = new PacienteDAO();
-                ExameDAO exameDAO = new ExameDAO();
                 ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico.getId());
             %>
             

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,8 +25,6 @@ public class PacienteController extends HttpServlet {
         
         try {
             PacienteDAO pacienteDAO = new PacienteDAO();
-            ArrayList<Paciente> pacientes;
-            Paciente paciente = new Paciente();
            
         } catch (SQLException ex) {
             Logger.getLogger(PacienteController.class.getName()).log(Level.SEVERE, null, ex);

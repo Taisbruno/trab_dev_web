@@ -16,10 +16,6 @@
 
 <%
     Consulta consulta = (Consulta) request.getAttribute("consultasMedico");
-    PacienteDAO pacienteDAO = new PacienteDAO();
-    ArrayList<Paciente> pacientes = pacienteDAO.getAll();
-    MedicoDAO medicoDAO = new MedicoDAO();
-    ArrayList<Medico> medicos = medicoDAO.getAll();
     TipoExameDAO tipoexameDAO = new TipoExameDAO();
     ArrayList<TipoExame> tipoexames = tipoexameDAO.getAll();
 %>
@@ -38,23 +34,13 @@
     <jsp:include page = "components/menu.jsp" />
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-        <h4 class="card-title" style="margin-top: 40px">Realizar Consulta:</h4>
-        <br>
-             
-     <form method="POST" action="RealizarConsultaController">   
+        <h4 class="card-title" style="margin-top: 40px; margin-bottom: 10px">Realizar Consulta:</h4>
+        <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="realizarConsulta.jsp">Voltar</a>       
+        <form method="POST" action="RealizarConsultaController">   
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
-        <div class="form-group">
-            <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idmedico" id="idmedico" value="<%= consulta.getIdMedico() %>">
-        </div>
-        <br> 
-        <div class="form-group">
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idmedico" id="idmedico" value="<%= consulta.getIdMedico() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" value="<%= consulta.getIdPaciente() %>">
-        </div>
-        <br>
-        <div class="form-group">
-            <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>" >
-        </div>
-        <br>
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>" >
         <div class="form-group">
             <label for="descricao"> Descrição </label>
             <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>

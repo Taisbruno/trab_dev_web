@@ -21,13 +21,13 @@
         <div class="form-group">
             <label for="exame" style="margin-top: 30px"> Selecione o Exame </label>
             <select class="form-select" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
-        <!-- option tag starts -->
+
             <option value="" disabled selected hidden></option>
             <option value="coracao">Coração</option>
             <option value="pulmao">Pulmão</option>
             <option value="abdome">Abdome</option>
             <option value="cranio">Crânio</option>
-        <!-- option tag ends -->
+
         </select>
         </div>
         <br>        

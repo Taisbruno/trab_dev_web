@@ -37,8 +37,6 @@ public class Date {
                     
                     resultWithHour = String.join(" ", result, hour);
                     
-                    
-                    
                 }
                 break;
                 
@@ -60,7 +58,6 @@ public class Date {
                                 
                 break;
         }
-        
         return resultWithHour;
     }    
 }
