@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import="dao.EspecialidadeDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Consulta"%>
 <%@page import="models.Paciente"%>
@@ -11,7 +13,6 @@
 <%@page import="dao.TipoExameDAO"%>
 <%@page import="dao.ExameDAO"%>
 
-<!DOCTYPE html>
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -21,7 +22,6 @@
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 
-        <!-- TITLE -->
         <title> Clínica Tais Bruno - Lista de Consultas </title>
     </head>
     <body>
@@ -48,7 +48,11 @@
             <%   
                 ConsultaDAO consultaDAO = new ConsultaDAO();
                 PacienteDAO pacienteDAO = new PacienteDAO();
-                ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico.getId());
+                MedicoDAO medicoDAO = new MedicoDAO();
+                EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+                ArrayList<Medico> medicos = medicoDAO.get(medico.getCpf());
+                for (Medico medico1 : medicos) {
+                    ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico1.getId());
             %>
             
             <div class="table-responsive">
@@ -56,6 +60,8 @@
                     <caption>Lista de Consultas - Total: <%= consultas.size() %></caption>
                     <thead class="thead-light">
                         <tr>
+                            <th scope="col"> Medico </th>
+                            <th scope="col"> Especialidade </th>
                             <th scope="col"> Data </th>
                             <th scope="col"> Descrição </th>
                             <th scope="col"> Realizada </th>
@@ -70,6 +76,8 @@
                                     
                         %>
                             <tr>
+                                <td><%= medico.getNome() %></td>
+                                <td><%= especialidadeDAO.get((medicoDAO.get(consulta.getIdMedico()).getIdEspecialidade())).getDescricao() %></td>
                                 <td class="data"><%= consulta.getData() %></td>
                                 <td><%= consulta.getDescricao() %></td>
                                 <td><%= consulta.getRealizada() %></td>
@@ -78,6 +86,9 @@
                                 <td class="d-flex flex-row justify-content-center align-items-center p-2">
                                 </td>
                             </tr>
+                        <%
+                           }
+                        %>
                         <%
                            }
                         %>

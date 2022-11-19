@@ -70,13 +70,14 @@ public class MedicoDAO extends HttpServlet {
         return medico;
     }
     
-    public Medico get(String cpf) {
-        Medico medico = new Medico();
+    public ArrayList<Medico> get(String cpf) {
+        ArrayList<Medico> arrayList = new ArrayList<>();
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + " WHERE cpf = '" + cpf + "'");
             
-            if (resultSet.next()) {
+            while (resultSet.next()) {
+                Medico medico = new Medico();
                 medico.setId(resultSet.getInt("id"));
                 medico.setNome(resultSet.getString("nome"));
                 medico.setCrm(resultSet.getInt("crm"));
@@ -85,16 +86,17 @@ public class MedicoDAO extends HttpServlet {
                 medico.setSenha(resultSet.getString("senha"));
                 medico.setAutorizado(resultSet.getString("autorizado"));
                 medico.setIdEspecialidade(resultSet.getInt("idespecialidade"));
+                arrayList.add(medico);
             }
         } catch(SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
-        return medico;
+        return arrayList;
     }
     
     public boolean insert(Medico medico) throws SQLException {
             try {
-                if (get(medico.getCpf()).getCpf() != null) {
+                if (get(medico.getCpf()) != null) {
                     System.out.println("SQL Error: Invalid CPF");
                     return false;
                 }

@@ -11,7 +11,6 @@
 <%@page import="dao.EspecialidadeDAO"%>
 
 <%
-    Paciente paciente = (Paciente) session.getAttribute("paciente");
     MedicoDAO medicoDAO = new MedicoDAO();
     ArrayList<Medico> medicos = medicoDAO.getAll();
     EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
@@ -30,6 +29,7 @@
     </head>
 <body>        
     <jsp:include page = "components/menu.jsp" />
+    <%@include file="components/ehPaciente.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
         <h4 class="card-title" style="margin-top: 40px">Marcar Consulta:</h4>
