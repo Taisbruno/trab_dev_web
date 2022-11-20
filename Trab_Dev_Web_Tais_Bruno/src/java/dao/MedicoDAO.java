@@ -70,14 +70,13 @@ public class MedicoDAO extends HttpServlet {
         return medico;
     }
     
-    public ArrayList<Medico> get(String cpf) {
-        ArrayList<Medico> arrayList = new ArrayList<>();
+    public Medico get(String cpf) {
+        Medico medico = new Medico();
         try {
             Statement statement = conn.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + " WHERE cpf = '" + cpf + "'");
             
-            while (resultSet.next()) {
-                Medico medico = new Medico();
+            if (resultSet.next()) {
                 medico.setId(resultSet.getInt("id"));
                 medico.setNome(resultSet.getString("nome"));
                 medico.setCrm(resultSet.getInt("crm"));
@@ -86,12 +85,12 @@ public class MedicoDAO extends HttpServlet {
                 medico.setSenha(resultSet.getString("senha"));
                 medico.setAutorizado(resultSet.getString("autorizado"));
                 medico.setIdEspecialidade(resultSet.getInt("idespecialidade"));
-                arrayList.add(medico);
+                
             }
         } catch(SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
-        return arrayList;
+        return medico;
     }
     
     public boolean insert(Medico medico) throws SQLException {

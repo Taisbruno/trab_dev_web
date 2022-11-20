@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
-import utils.CPF;
 
 @WebServlet(name = "PacienteController", urlPatterns = {"/PacienteController"})
 public class PacienteController extends HttpServlet {

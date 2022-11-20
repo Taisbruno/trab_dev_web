@@ -1,9 +1,6 @@
 package models;
 
 import dao.ExameDAO;
-import dao.MedicoDAO;
-import dao.MedicoDAO;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Consulta {

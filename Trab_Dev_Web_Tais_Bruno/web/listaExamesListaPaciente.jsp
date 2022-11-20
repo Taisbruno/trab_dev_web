@@ -31,7 +31,7 @@
                     <h2 class="card-title" style="margin-top: 10px; padding-bottom: 2%; text-align: center">Exames da Consulta</h2>
                     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="listaConsultasPaciente.jsp"><b>Voltar</b></a>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 20px; margin-bottom: 10px">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">
                 <a class="navbar-brand" href="#"><b>Exames da Consulta</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +49,7 @@
             
             <div class="table-responsive">
                 <table class="table table-borderless table-hover table-sm">
+                    <caption>Lista de Exames - Total: <%= exames.size() %></caption>
                     <thead class="thead-light">
                         <tr>
                             <th scope="col"> Exames </th>

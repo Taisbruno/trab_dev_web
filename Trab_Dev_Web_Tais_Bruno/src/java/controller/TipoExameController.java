@@ -1,20 +1,17 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import dao.ConsultaDAO;
 import dao.TipoExameDAO;
 import dao.ExameDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Exames;
-import models.Consulta;
 
 @WebServlet(name = "TipoExameController", urlPatterns = {"/TipoExameController"})
 public class TipoExameController extends HttpServlet {

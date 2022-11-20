@@ -23,7 +23,7 @@
             <input style="margin-top: 5px; width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="especialidade" id="especialidade" placeholder="Digite o nome da especialidade" required>
         </div>
         <br>
-        <!-- BOTÃO -->
+        
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Enviar </button>
     </form>
     </div>

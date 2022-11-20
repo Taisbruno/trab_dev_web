@@ -73,7 +73,7 @@
         <label for="realizada"> Consulta Realizada? </label>
         <input type="checkbox" style="vertical-align: -2px; margin-left: 2px" id="realizada" name="realizada">
         </div>
-        <!-- BOTÃO -->
+        
         <button type="submit" class="btn btn-dark" style="margin-top: 30px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
      </form>
     

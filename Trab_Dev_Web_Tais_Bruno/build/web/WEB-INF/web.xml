@@ -5,10 +5,6 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>IdentifiqueController</servlet-name>
-        <servlet-class>controller.IdentifiqueController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>MedicoController</servlet-name>
         <servlet-class>controller.MedicoController</servlet-class>
     </servlet>
@@ -45,10 +41,6 @@
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>IdentifiqueController</servlet-name>
-        <url-pattern>/IdentifiqueController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>MedicoController</servlet-name>
         <url-pattern>/MedicoController</url-pattern>
     </servlet-mapping>
@@ -76,13 +68,9 @@
         <servlet-name>TipoExameController</servlet-name>
         <url-pattern>/TipoExameController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LoginController1</servlet-name>
-        <url-pattern>/LoginController1</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 </web-app>

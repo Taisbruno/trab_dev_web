@@ -1,6 +1,7 @@
 <%@page import="models.Administrador"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">

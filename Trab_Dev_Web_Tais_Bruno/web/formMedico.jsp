@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -90,7 +90,7 @@
         <input type="checkbox" style="vertical-align: -2px; margin-left: 2px" id="autorizado" name="autorizado" checked>
         </div>
         <br>
-        <!-- BOTÃO -->
+       
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Salvar </button>
     </form>
     </div>

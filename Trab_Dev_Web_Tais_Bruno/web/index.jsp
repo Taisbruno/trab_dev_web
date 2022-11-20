@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -9,7 +9,6 @@
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 
-        <!-- TITLE -->
         <title> Clínica Tais Bruno </title>
     </head>
     <body>
@@ -50,7 +49,7 @@
                     <span class="text-muted">Desenvolvido por <b>Tais Bruno</b><br/>Universidade Federal Fluminense</span>
                 </div>
             </footer>
-        <!-- JavaScript Bundle with Popper -->
+        
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>
 </html>

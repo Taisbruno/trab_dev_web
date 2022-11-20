@@ -36,7 +36,7 @@
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="search" class="form-control" name="consulta" id="consulta" required>
         </div>
         <br>
-        <!-- BOTÃO -->
+        
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
     </form>
     </div>

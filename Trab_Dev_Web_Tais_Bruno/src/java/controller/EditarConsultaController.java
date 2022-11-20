@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import models.Consulta;
 import dao.ConsultaDAO;
-import dao.ExameDAO;
 import dao.MedicoDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import models.Exames;
 import models.Medico;
 import utils.Date;
 
@@ -51,8 +47,6 @@ public class EditarConsultaController extends HttpServlet {
             throws ServletException, IOException {
         
             ConsultaDAO consultaDAO = new ConsultaDAO();
-            ExameDAO exameDAO = new ExameDAO();
-            Exames exame = new Exames();
             Consulta consulta = new Consulta();
             request.setCharacterEncoding("UTF-8");
            
@@ -63,10 +57,6 @@ public class EditarConsultaController extends HttpServlet {
             consulta.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
             consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
             consultaDAO.update(consulta);
-            
-            exame.setIdTipoExame(Integer.parseInt(request.getParameter("idtipoexame")));
-            exame.setIdConsulta(Integer.parseInt(request.getParameter("id")));
-            exameDAO.update(exame);
             
             ArrayList<Consulta> consultasmedico;
             MedicoDAO medicoDAO = new MedicoDAO();
