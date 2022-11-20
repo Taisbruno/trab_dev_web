@@ -167,6 +167,5 @@ public class ConsultaDAO extends HttpServlet {
             return false;
         }
     }
-   
-    
+
 }

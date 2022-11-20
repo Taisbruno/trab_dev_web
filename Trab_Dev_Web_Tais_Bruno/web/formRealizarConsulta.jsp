@@ -35,22 +35,23 @@
     <%@include file="components/ehMedico.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-        <h4 class="card-title" style="margin-top: 40px; margin-bottom: 10px">Realizar Consulta:</h4>
-        <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="realizarConsulta.jsp">Voltar</a>       
+        <h4 class="card-title" style="margin-top: 40px; margin-bottom: 40px">Realizar Consulta:</h4>
+        <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="realizarConsulta.jsp"><b>Voltar</b></a>   
         <form method="POST" action="RealizarConsultaController">   
+            <br>
+            <br>
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idmedico" id="idmedico" value="<%= consulta.getIdMedico() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" value="<%= consulta.getIdPaciente() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>" >
         <div class="form-group">
-            <label for="descricao"> Descrição </label>
-            <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>
+            <label for="descricao"> <b>Descrição</b> </label>
+            <input style="width:300px; height: 60px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>
         </div>
         <br>
         <div class="form-group">
             <label for="exame"><b> Exames </b></label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idtipoexame"  name="idtipoexame"> 
-                <option value="" disabled selected> </option>
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idtipoexame" name="idtipoexame" multiple> 
                 <%
                     for (int indexxx = 0; indexxx < tipoexames.size(); indexxx++) {
                         TipoExame tipoexame = tipoexames.get(indexxx);           
@@ -64,14 +65,13 @@
         <br>
         <div class="form-group">
             <label for="realizada"><b> Consulta Realizada? </b></label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="realizada"  name="realizada">                       
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="realizada"  name="realizada">                       
                 <option value="N" disabled> Não </option>
                 <option value="S" selected> Sim </option> 
             </select>
         </div>
             
-        <!-- BOTÃO -->
-        <button type="submit" class="btn btn-dark" style="margin-top: 30px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
+        <button type="submit" class="btn btn-dark" style="margin-top: 50px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
      </form>
     
     </div>

@@ -42,7 +42,6 @@ public class RealizarConsultaController extends HttpServlet {
                 update.forward(request, response);
                 
                 break;
-                
         }       
     }
 
@@ -64,9 +63,14 @@ public class RealizarConsultaController extends HttpServlet {
             consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
             consultaDAO.update(consulta);
             
-            exame.setIdTipoExame(Integer.parseInt(request.getParameter("idtipoexame")));
-            exame.setIdConsulta(Integer.parseInt(request.getParameter("id")));
-            exameDAO.insert(exame);
+            String[] exames = request.getParameterValues("idtipoexame");
+            String id = request.getParameter("id");
+            
+            for(int i = 0; i < exames.length; i++) {
+                exame.setIdTipoExame(Integer.parseInt(exames[i]));
+                exame.setIdConsulta(Integer.parseInt(id));
+                exameDAO.insert(exame);
+            }
             
             ArrayList<Consulta> consultasmedico;
             MedicoDAO medicoDAO = new MedicoDAO();

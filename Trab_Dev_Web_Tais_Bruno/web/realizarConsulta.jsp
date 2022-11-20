@@ -28,10 +28,10 @@
         
         <div class="card-title">
                 <div class="card-body" style="padding: 10%; text-align: center;">
-                    <h2 class="card-title" style="margin-top: 20px; padding-bottom: 2%; text-align: center">Consultas</h2>
-                    <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="AreaMedico.jsp">Voltar</a>
+                    <h2 class="card-title" style="margin-top: 10px; padding-bottom: 2%; text-align: center">Consultas</h2>
+                    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="AreaMedico.jsp"><b>Voltar</b></a>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">
                 <a class="navbar-brand" href="#"><b>Consultas</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,9 +47,7 @@
                     PacienteDAO pacienteDAO = new PacienteDAO();
                     MedicoDAO medicoDAO = new MedicoDAO();
                     EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
-                    ArrayList<Medico> medicos = medicoDAO.get(medico.getCpf());
-                    for (Medico medico1 : medicos) {
-                    ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico1.getId());
+                    ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico.getId());
                 %>
                 
                 <table class="table table-borderless table-hover table-sm">
@@ -62,7 +60,6 @@
                             <th scope="col"> Descrição </th>
                             <th scope="col"> Realizada </th>
                             <th scope="col"> Paciente </th>
-                            <th scope="col"> Exames </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,7 +78,6 @@
                                 <td><%= consulta.getDescricao() %></td>
                                 <td><%= consulta.getRealizada() %></td>
                                 <td><%= pacienteDAO.get(consulta.getIdPaciente()).getNome() %></td>
-                                <td><%= consulta.getExames() %></td>
                                 
                                 <td class="d-flex flex-row justify-content-center align-items-center p-2">
                                     <% if (consulta.getRealizada().equals("N")) {
@@ -96,8 +92,8 @@
                                     %>
                                     <% if (consulta.getRealizada().equals("S")) {
                                     %> 
-                                        <a href="<%= linkVisualizar %>" class="btn btn-info"> Visualizar<i class="fas fa-pen"></i></a>
-                                        <a href="<%= linkUpdate %>" class="btn btn-info"> Editar<i class="fas fa-pen"></i></a>
+                                        <a href="<%= linkVisualizar %>" class="btn btn-info" style="margin-right:10px;"> Visualizar<i class="fas fa-pen"></i></a>
+                                        <a href="<%= linkUpdate %>" class="btn btn-info" style="margin-right:10px;"> Editar<i class="fas fa-pen"></i></a>
                                     <% 
                                     } else {
                                     %> 
@@ -108,9 +104,6 @@
                                     %>
                                 </td>
                             </tr>
-                        <%
-                            }
-                        %>
                         <%
                             }
                         %>

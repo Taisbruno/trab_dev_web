@@ -15,7 +15,8 @@
 <body>        
     <jsp:include page = "components/menu.jsp" />
     
-    <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
+    <div class="rounded border border-dark p-5 m-5" style="padding: 10px; text-align: center">
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="index.jsp"><b>Voltar</b></a>
     <h4 class="card-title" style="margin-top: 50px">Já possui cadastro?</h4>  
     <br>
         <a class="nav-link" href="login.jsp" style="text-decoration: underline">Login</a>
@@ -34,7 +35,7 @@
         <!-- CPF -->
         <div class="form-group">
             <label for="cpf"><b> CPF </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
         </div>
         <br>
         <!-- SENHA -->

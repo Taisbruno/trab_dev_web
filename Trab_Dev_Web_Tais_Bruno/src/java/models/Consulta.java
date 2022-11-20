@@ -2,6 +2,8 @@ package models;
 
 import dao.ExameDAO;
 import dao.MedicoDAO;
+import dao.MedicoDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Consulta {
@@ -74,7 +76,7 @@ public class Consulta {
     
     public String getExames(){
         ExameDAO exameDAO = new ExameDAO();
-        List<Exames> exames = exameDAO.ListaExames();
+        List<Exames> exames = exameDAO.getByConsulta(this.id);
         for(Exames exame : exames){
             if(exame.getIdConsulta() == this.id){
                 return exame.getDescricaoTipoExame();

@@ -15,8 +15,9 @@
 <body>        
     <jsp:include page = "components/menu.jsp" />
     
-    <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-    <h3 class="card-title" style="margin-top: 40px">Login</h3>
+    <div class="rounded border border-dark p-5 m-5" style="text-align: center">
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="index.jsp"><b>Voltar</b></a>
+    <h3 class="card-title" style="margin-top: 60px">Login</h3>
     <form method="POST" action="LoginController" style="text-align: center; margin-top: 30px">                   
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="id" id="id">
         

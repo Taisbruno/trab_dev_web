@@ -19,9 +19,9 @@
         <br>    
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
     <br>
-        <a class="nav-link" href="realizarConsulta.jsp" style="text-decoration: underline">Realizar Consulta</a>
+    <a class="nav-link" href="realizarConsulta.jsp" style="text-decoration: underline"><b>Realizar Consulta</b></a>
     <br>
-        <a class="nav-link" href="listaConsultasMedico.jsp" style="text-decoration: underline">Lista de Consultas</a>
+    <a class="nav-link" href="listaConsultasMedico.jsp" style="text-decoration: underline"><b>Lista de Consultas</b></a>
     <br>
     </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>

@@ -13,8 +13,6 @@
 <%
     MedicoDAO medicoDAO = new MedicoDAO();
     ArrayList<Medico> medicos = medicoDAO.getAll();
-    EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
-    ArrayList<Especialidade> especialidades = especialidadeDAO.getAll();
 %>
 
 <html lang="pt-BR">
@@ -32,23 +30,24 @@
     <%@include file="components/ehPaciente.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-        <h4 class="card-title" style="margin-top: 40px">Marcar Consulta:</h4>
+        <h4 class="card-title" style="margin-top: 40px; margin-bottom: 40px">Marcar Consulta:</h4>
+        <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="AreaPaciente.jsp"><b>Voltar</b></a>
         <br>
-             
      <form method="POST" action="MarcarConsultaController">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idconsulta" id="idconsulta" >
             
         <div class="form-group">
-            <label for="nomemedico"> Nome do Médico </label>
+            <br>
+            <br>
+            <label for="nomemedico"><b> Médico e Especialidade </b></label>
             <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="idmedico" name="idmedico" required>
                 <option value="" disabled>Nome do Médico</option>
                 <%
                     for (int index = 0; index < medicos.size(); index++) {
                         Medico medico = medicos.get(index);
-                        Especialidade especialidade = especialidades.get(index);
                 %>
 
-                <option value="<%= medico.getId() %>"><%= medico.getNome() + " - " + especialidade.getDescricao() %></option>
+                <option value="<%= medico.getId() %>"><%= medico.getNome() + " - " + medico.getNomeEspecialidade(medico.getIdEspecialidade()) %></option>
                 <%
                     }
                 %>
@@ -58,12 +57,12 @@
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" type="hidden" value="<%= paciente.getId()%>">
 
         <div class="form-group">
-            <label for="data"> Selecione a data </label>         
+            <label for="data"><b>Selecione a data</b></label>         
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="date" class="form-control" name="data" id="data" required>
         </div>
         <br>
         <div class="form-group">
-            <label for="hora"> Selecione o horário </label>         
+            <label for="hora"><b> Selecione o horário</b> </label>         
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="time" class="form-control" name="hora" id="hora" required>
         </div>
         <br>

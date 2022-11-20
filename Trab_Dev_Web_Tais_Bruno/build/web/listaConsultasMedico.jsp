@@ -30,11 +30,10 @@
         
         <div class="card-title">
                 <div class="card-body" style="padding: 10%; text-align: center;">
-                    <h2 class="card-title" style="margin-top: 20px; padding-bottom: 2%; text-align: center">Lista de Consultas</h2>
-                    <a class="nav-link" style="margin-bottom: 50px; text-decoration: underline; text-align: center" href="AreaMedico.jsp">Voltar</a>
+                    <h2 class="card-title" style="margin-top: 10px; padding-bottom: 2%; text-align: center">Lista de Consultas</h2>
+                    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="AreaMedico.jsp"><b>Voltar</b></a>
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">
                 <a class="navbar-brand" href="#"><b>Consultas</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,16 +42,13 @@
                 <a href="LoginController?action=logout" class="btn btn-outline-light my-2 my-sm-0"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </div>
         </nav>
-        
         <div class="container">
             <%   
                 ConsultaDAO consultaDAO = new ConsultaDAO();
                 PacienteDAO pacienteDAO = new PacienteDAO();
                 MedicoDAO medicoDAO = new MedicoDAO();
                 EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
-                ArrayList<Medico> medicos = medicoDAO.get(medico.getCpf());
-                for (Medico medico1 : medicos) {
-                    ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico1.getId());
+                ArrayList<Consulta> consultas = consultaDAO.getByMedico(medico.getId());
             %>
             
             <div class="table-responsive">
@@ -66,14 +62,14 @@
                             <th scope="col"> Descrição </th>
                             <th scope="col"> Realizada </th>
                             <th scope="col"> Paciente </th>
-                            <th scope="col"> Exames </th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
                             for (int index = 0; index < consultas.size(); index++) {
                                 Consulta consulta = consultas.get(index); 
-                                    
+                                String linkExames = "ListaExamesController?action=getlistamedico&id=" + consulta.getId();
+
                         %>
                             <tr>
                                 <td><%= medico.getNome() %></td>
@@ -82,13 +78,10 @@
                                 <td><%= consulta.getDescricao() %></td>
                                 <td><%= consulta.getRealizada() %></td>
                                 <td><%= pacienteDAO.get(consulta.getIdPaciente()).getNome() %></td>
-                                <td><%= consulta.getExames() %></td>
                                 <td class="d-flex flex-row justify-content-center align-items-center p-2">
+                                <a href="<%= linkExames %>" class="btn btn-info"> Ver Exames<i class="fas fa-pen"></i></a>
                                 </td>
                             </tr>
-                        <%
-                           }
-                        %>
                         <%
                            }
                         %>
