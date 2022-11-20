@@ -51,6 +51,7 @@
         <div class="form-group">
             <label for="exame"><b> Exames </b></label>
             <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="idtipoexame" name="idtipoexame" multiple> 
+                <option value="" hidden></option>
                 <%
                     for (int indexxx = 0; indexxx < tipoexames.size(); indexxx++) {
                         TipoExame tipoexame = tipoexames.get(indexxx);           
@@ -64,7 +65,7 @@
         <br>
         <div class="form-group">
             <label for="realizada"><b> Consulta Realizada? </b></label>
-            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="realizada"  name="realizada">                       
+            <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="realizada" name="realizada" required>                
                 <option value="N" disabled> Não </option>
                 <option value="S" selected> Sim </option> 
             </select>

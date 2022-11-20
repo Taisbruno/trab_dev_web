@@ -12,8 +12,6 @@ import models.Consulta;
 import dao.ConsultaDAO;
 import dao.MedicoDAO;
 import dao.ExameDAO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Medico;
 import models.Exames;
 import utils.Date;
@@ -54,6 +52,7 @@ public class RealizarConsultaController extends HttpServlet {
             Exames exame = new Exames();
             Consulta consulta = new Consulta();
             request.setCharacterEncoding("UTF-8");
+            String message = "";
             
             consulta.setId(Integer.parseInt(request.getParameter("id")));
             consulta.setData(Date.format(request.getParameter("data"), "backToDatabase"));
@@ -63,24 +62,35 @@ public class RealizarConsultaController extends HttpServlet {
             consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
             consultaDAO.update(consulta);
             
+            try {
             String[] exames = request.getParameterValues("idtipoexame");
             String id = request.getParameter("id");
             
-            for(int i = 0; i < exames.length; i++) {
-                exame.setIdTipoExame(Integer.parseInt(exames[i]));
-                exame.setIdConsulta(Integer.parseInt(id));
-                exameDAO.insert(exame);
+            if (exames.length > 0) {
+                for(int j = 0; j < exames.length; j++) {
+                    exame.setIdTipoExame(Integer.parseInt(exames[j]));
+                    exame.setIdConsulta(Integer.parseInt(id));
+                    exameDAO.insert(exame);
+                }
             }
+            } catch(NumberFormatException e) {
+                message = "Error: " + e.getMessage();
+                System.out.println(message);
             
+            request.setAttribute("message", message);
+            request.setAttribute("error", 1);
+            
+            } finally {
+                
             ArrayList<Consulta> consultasmedico;
             MedicoDAO medicoDAO = new MedicoDAO();
             Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
             consultasmedico = consultaDAO.getByMedico(medico.getId());
             
             request.setAttribute("consultasMedico", consultasmedico);
-            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
+            RequestDispatcher list = getServletContext().getRequestDispatcher("/realizarConsulta.jsp");
             list.forward(request, response);
-            
         }
     }
+}
 

@@ -56,7 +56,7 @@
                     <caption>Lista de Consultas - Total: <%= consultas.size() %></caption>
                     <thead class="thead-light">
                         <tr>
-                            <th scope="col"> Medico </th>
+                            <th scope="col"> Médico </th>
                             <th scope="col"> Especialidade </th>
                             <th scope="col"> Data </th>
                             <th scope="col"> Descrição </th>

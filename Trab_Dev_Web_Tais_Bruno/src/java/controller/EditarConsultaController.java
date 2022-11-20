@@ -64,7 +64,7 @@ public class EditarConsultaController extends HttpServlet {
             consultasmedico = consultaDAO.getByMedico(medico.getId());
             
             request.setAttribute("consultasMedico", consultasmedico);
-            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
+            RequestDispatcher list = getServletContext().getRequestDispatcher("/realizarConsulta.jsp");
             list.forward(request, response);
             
         }

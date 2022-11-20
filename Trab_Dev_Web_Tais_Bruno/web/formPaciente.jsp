@@ -47,7 +47,7 @@
         <div class="form-group">
             <label for="idtipoplano"><b> Plano </b></label>
             <select class="form-select" id="idtipoplano" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" name="idtipoplano" required>
-            <option value="" disabled selected hidden></option>
+            <option value="" disabled selected hidden>Selecione seu Plano</option>
             <option value=1>Unimed</option>
             <option value=2>Amil</option>
             <option value=3>SulAmerica</option>

@@ -41,7 +41,7 @@
             <br>
             <label for="nomemedico"><b> Médico e Especialidade </b></label>
             <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="idmedico" name="idmedico" required>
-                <option value="" disabled>Nome do Médico</option>
+                <option value="" disabled selected hidden></option>
                 <%
                     for (int index = 0; index < medicos.size(); index++) {
                         Medico medico = medicos.get(index);
