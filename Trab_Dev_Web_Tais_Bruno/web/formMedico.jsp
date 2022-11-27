@@ -17,8 +17,10 @@
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center; justify-content: center">
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Médico:</h4>
     <br>
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="cadastraMedicos.jsp"><b>Voltar</b></a>
     <form method="POST" action="MedicoController">                   
-        
+        <br>
+        <br>
         <div class="form-group">
             <label for="nome"><b> Nome </b></label>
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="nome" id="nome" autocomplete="off" placeholder="Digite o nome" required>

@@ -26,8 +26,7 @@ public class PacienteController extends HttpServlet {
            
         } catch (SQLException ex) {
             Logger.getLogger(PacienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }    
     }
     
     @Override
@@ -52,7 +51,7 @@ public class PacienteController extends HttpServlet {
         try {
             pacienteDAO.insert(paciente);
         } catch (Exception e) {
-            throw new RuntimeException("Falha na inserção do paciente");
+            throw new RuntimeException("Falha no cadastro do paciente");
         } finally {
             ArrayList<Paciente> pacientes;
             pacientes = pacienteDAO.getAll();

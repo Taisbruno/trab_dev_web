@@ -18,6 +18,20 @@
     
         <h2 style="text-align: center; margin-top: 80px;">Área do Administrador</h2>
         <a class="nav-link" href="LoginController?action=logout" style="text-decoration: underline; text-align: center">Logout</a>
-    <script src="bootstrap/bootstrap.bundle.min.js"></script>
+        <br>    
+        <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
+        <br>
+        <a class="nav-link" href="cadastraMedicos.jsp" style="text-decoration: underline"><b>Cadastra Médicos</b></a>
+        <br>
+        <a class="nav-link" href="cadastraPacientes.jsp" style="text-decoration: underline"><b>Cadastra Pacientes</b></a>
+        <br>
+        <a class="nav-link" href="cadastraAdministradores.jsp" style="text-decoration: underline"><b>Cadastra Administradores</b></a>
+        <br>
+        <a class="nav-link" href="cadastraTipoPlano.jsp" style="text-decoration: underline"><b>Cadastra Tipos de Plano de Saúde</b></a>
+        <br>
+        <a class="nav-link" href="cadastraEspecialidades.jsp" style="text-decoration: underline"><b>Cadastra Especialidades Médicas</b></a>
+        <br>
+        </div>
+        <script src="bootstrap/bootstrap.bundle.min.js"></script>
     </body>
 </html>
