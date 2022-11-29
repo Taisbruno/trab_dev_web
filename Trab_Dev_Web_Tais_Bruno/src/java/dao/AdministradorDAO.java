@@ -82,22 +82,12 @@ public class AdministradorDAO extends HttpServlet {
     
     public boolean insert(Administrador administrador) {
         try {
-            
-            try {
-                if (get(administrador.getCpf()).getCpf() != null) {
-                    System.out.println("SQL Error: Invalid CPF");
-                    return false;
-                }
-            } catch (NullPointerException npe) {
-                System.out.println("CPF Not Found");
-            }
-            
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
-                this.tableName + " (cpf, senha, nome) VALUES (?,?,?)");
+                this.tableName + " (nome, cpf, senha) VALUES (?,?,?)");
             
-            preparedStatement.setString(1, administrador.getCpf());
-            preparedStatement.setString(2, administrador.getSenha());
-            preparedStatement.setString(3, administrador.getNome());
+            preparedStatement.setString(1, administrador.getNome());
+            preparedStatement.setString(2, administrador.getCpf());
+            preparedStatement.setString(3, administrador.getSenha());
             preparedStatement.executeUpdate();
             
             return true;
@@ -110,11 +100,11 @@ public class AdministradorDAO extends HttpServlet {
     public boolean update(Administrador administrador) {
         
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE " + this.tableName + " SET cpf=?, senha=?, nome=? WHERE id=?");
+            PreparedStatement preparedStatement = conn.prepareStatement("UPDATE " + this.tableName + " SET nome=?, cpf=?, senha=? WHERE id=?");
             
-            preparedStatement.setString(1, administrador.getCpf());
-            preparedStatement.setString(2, administrador.getSenha());
-            preparedStatement.setString(3, administrador.getNome());
+            preparedStatement.setString(1, administrador.getNome());
+            preparedStatement.setString(2, administrador.getCpf());
+            preparedStatement.setString(3, administrador.getSenha());
             preparedStatement.setInt(4, administrador.getId());
             preparedStatement.executeUpdate();
             

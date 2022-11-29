@@ -5,6 +5,16 @@ public class Administrador {
     private String nome;
     private String cpf;
     private String senha;
+    
+    public Administrador(String nome, String cpf, String senha){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+    
+    public Administrador() {
+        
+    }
 
     public int getId() {
         return id;

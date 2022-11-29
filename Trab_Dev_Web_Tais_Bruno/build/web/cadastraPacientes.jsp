@@ -29,7 +29,7 @@
                     <br>
                     <br>
                     <br>
-                    <a href="formPaciente.jsp" class="btn btn-outline-dark my-2 my-sm-0"><b>Inserir Paciente</b></a>
+                    <a href="formInsertPaciente_Admin.jsp" class="btn btn-outline-dark my-2 my-sm-0"><b>Inserir Paciente</b></a>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">

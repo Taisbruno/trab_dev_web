@@ -60,9 +60,9 @@
                             for (int index = 0; index < administradores.size(); index++) {
                                 Administrador administradorr = administradores.get(index);
                                 
-                                String linkUpdate = "EditarConsultaController?action=update&id=" + administradorr.getId();
+                                String linkUpdate = "EditarAdministradorController?action=update&id=" + administradorr.getId();
                                 String linkDelete = "RealizarConsultaController?action=update&id=" + administradorr.getId();
-                                String linkVisualizar = "VisualizarConsultaController?action=get&id=" + administradorr.getId();
+                                String linkVisualizar = "VisualizarAdministradorController?action=get&id=" + administradorr.getId();
                         %>
                             <tr>
                                 <td><%= administradorr.getNome() %></td>

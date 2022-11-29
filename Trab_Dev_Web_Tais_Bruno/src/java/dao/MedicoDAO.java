@@ -95,12 +95,7 @@ public class MedicoDAO extends HttpServlet {
     
     public boolean insert(Medico medico) throws SQLException {
             try {
-                if (get(medico.getCpf()) != null) {
-                    System.out.println("SQL Error: Invalid CPF");
-                    return false;
-                }
-            
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
+                PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
                 this.tableName + " (nome, crm, estadocrm, cpf, senha, autorizado, idespecialidade) VALUES (?,?,?,?,?,?,?)");
             
             preparedStatement.setString(1, medico.getNome());
@@ -133,6 +128,7 @@ public class MedicoDAO extends HttpServlet {
             preparedStatement.setString(5, medico.getSenha());
             preparedStatement.setString(6, medico.getAutorizado());
             preparedStatement.setInt(7, medico.getIdEspecialidade());
+            preparedStatement.setInt(8, medico.getId());
             preparedStatement.executeUpdate();
             
             return true;

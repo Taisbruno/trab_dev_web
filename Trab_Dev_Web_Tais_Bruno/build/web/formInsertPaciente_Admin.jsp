@@ -9,20 +9,17 @@
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 
-    <title> Login - Paciente </title>
+    <title> Cadastro - Paciente </title>
     </head>
 
 <body>        
     <jsp:include page = "components/menu.jsp" />
+    <%@include file="components/ehAdministrador.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-    <h4 class="card-title" style="margin-top: 50px">Já possui cadastro?</h4>  
-    <br>
-        <a class="nav-link" href="login.jsp" style="text-decoration: underline">Login</a>
-    <br>
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Paciente:</h4>  
     <br>
-
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraPacientes.jsp"><b>Voltar</b></a>
     <form method="POST" action="PacienteController">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idpaciente" id="idpaciente" >
         
@@ -55,13 +52,12 @@
         </div>
         <br>
         <div class="form-group">
-        <label for="autorizado"> Autorizado? </label>
-        <select style="vertical-align: -2px; margin-left: 2px" class="form-control" id="autorizado"  name="autorizado" required>
-        <option value="S"> Sim </option>           
+        <label for="autorizado"><b> Autorizado? </b></label>
+        <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="autorizado"  name="autorizado" required>
+        <option value="S"> Sim </option>    
         <option value="N"> Não </option>
         </select>
         </div>
-        
         <button type="submit" class="btn btn-dark" style="margin-top: 30px; margin-bottom: 30px"><i class="fas fa-save"></i> Salvar </button>
     </form>
     </div>

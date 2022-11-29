@@ -1,5 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Especialidade"%>
+<%@page import="dao.EspecialidadeDAO"%>
+
+<%  
+    EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
+    ArrayList<Especialidade> especialidades = especialidadeDAO.getAll();
+%>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -13,12 +22,14 @@
     </head>
 <body>
     <jsp:include page = "components/menu.jsp" />
+    <%@include file="components/ehAdministrador.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center; justify-content: center">
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Médico:</h4>
     <br>
-    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="cadastraMedicos.jsp"><b>Voltar</b></a>
-    <form method="POST" action="MedicoController">                   
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraMedicos.jsp"><b>Voltar</b></a>
+    <form method="POST" action="MedicoController">     
+        <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idmedico" id="idmedico" >
         <br>
         <br>
         <div class="form-group">
@@ -28,13 +39,12 @@
         <br>
         <div class="form-group">
             <label for="crm"><b> CRM </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="number" class="form-control" name="crm" id="crm" autocomplete="off" placeholder="Digite o CRM" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="crm" id="crm" autocomplete="off" placeholder="Digite o CRM" required>
         </div>
         <br>
         <div class="form-group">
             <label for="estadocrm"><b> Estado do CRM </b></label>
-            <select class="form-select" id="estadocrm" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
-            <option value="" disabled selected hidden></option>
+            <select class="form-select" id="estadocrm" name="estadocrm" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
             <option value="AP">Amapá</option>
@@ -67,19 +77,22 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="especialidade"><b> Especialidade </b></label>
-            <select class="form-select" id="especialidade" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
-            <option value="" disabled selected hidden></option>
-            <option value="cardio">Cardiologia</option>
-            <option value="neuro">Neurologia</option>
-            <option value="gastro">Gastrologista</option>
-            <option value="pneumo">Pneumologia</option>
+            <label for="idespecialidade"><b> Especialidade </b></label>
+            <select class="form-select" id="idespecialidade" name="idespecialidade" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
+             <%
+                for (int index = 0; index < especialidades.size(); index++) {
+                    Especialidade especialidade = especialidades.get(index);           
+             %>
+            <option value="<%= especialidade.getId() %>"><%= especialidade.getDescricao() %></option>
+            <%
+                }
+            %>
             </select>
         </div>
         <br>
         <div class="form-group">
             <label for="cpf"><b> CPF </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="number" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control cpf" name="cpf" id="cpf" autocomplete="off" placeholder="Digite o CPF" required>
         </div>
         <br>
         <div class="form-group">
@@ -88,11 +101,13 @@
         </div>
         <br>
         <div class="form-group">
-        <label for="autorizado"> Autorizado </label>
-        <input type="checkbox" style="vertical-align: -2px; margin-left: 2px" id="autorizado" name="autorizado" checked>
+        <label for="autorizado"><b> Autorizado? </b></label>
+        <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" id="autorizado"  name="autorizado" required>
+        <option value="S"> Sim </option>    
+        <option value="N"> Não </option>
+        </select>
         </div>
         <br>
-       
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Salvar </button>
     </form>
     </div>
