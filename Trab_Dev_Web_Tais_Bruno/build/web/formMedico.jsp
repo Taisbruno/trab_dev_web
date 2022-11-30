@@ -79,10 +79,10 @@
         <div class="form-group">
             <label for="idespecialidade"><b> Especialidade </b></label>
             <select class="form-select" id="idespecialidade" name="idespecialidade" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" required>
-             <%
+            <%
                 for (int index = 0; index < especialidades.size(); index++) {
                     Especialidade especialidade = especialidades.get(index);           
-             %>
+            %>
             <option value="<%= especialidade.getId() %>"><%= especialidade.getDescricao() %></option>
             <%
                 }

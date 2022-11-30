@@ -74,7 +74,8 @@
                                 
                                 String linkUpdate = "EditarMedicoController?action=update&id=" + medico.getId();
                                 String linkDelete = "RealizarConsultaController?action=update&id=" + medico.getId();
-                                String linkVisualizar = "VisualizarMedicoController?action=get&id=" + medico.getId();
+                                String linkVisualizar = "MedicoController?action=get&id=" + medico.getId();
+                                String linkVisualizarConsultas = "MedicoController?action=getAll&id=" + medico.getId();
                         %>
                             <tr>
                                 <td><%= medico.getNome() %></td>
@@ -88,6 +89,8 @@
                                 <td class="d-flex flex-row justify-content-center align-items-center p-2">
 
                                     <a href="<%= linkVisualizar %>" class="btn btn-info" style="margin-right:10px;"> Visualizar <i class="fas fa-pen"></i></a>
+                                    
+                                    <a href="<%= linkVisualizarConsultas %>" class="btn btn-info" style="margin-right:10px;"> Visualizar Consultas <i class="fas fa-pen"></i></a>
 
                                     <a href="<%= linkUpdate %>" class="btn btn-info" style="margin-right:10px;"> Editar <i class="fas fa-pen"></i></a>
 

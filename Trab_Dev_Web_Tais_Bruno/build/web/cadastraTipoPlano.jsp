@@ -30,7 +30,7 @@
                     <br>
                     <br>
                     <br>
-                    <a href="formConvenio.jsp" class="btn btn-outline-dark my-2 my-sm-0"><b>Inserir Tipo de Plano</b></a>
+                    <a href="formTipoPlano.jsp" class="btn btn-outline-dark my-2 my-sm-0"><b>Inserir Tipo de Plano</b></a>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">
@@ -60,9 +60,9 @@
                             for (int index = 0; index < tipoplanos.size(); index++) {
                                 TipoPlano tipoplano = tipoplanos.get(index);
                                 
-                                String linkUpdate = "EditarConsultaController?action=update&id=" + tipoplano.getId();
+                                String linkUpdate = "EditarTipoPlanoController?action=update&id=" + tipoplano.getId();
                                 String linkDelete = "RealizarConsultaController?action=update&id=" + tipoplano.getId();
-                                String linkVisualizar = "VisualizarConsultaController?action=get&id=" + tipoplano.getId();
+                                String linkVisualizar = "TipoPlanoController?action=get&id=" + tipoplano.getId();
                         %>
                             <tr>
                                 <td><%= tipoplano.getDescricao() %></td>

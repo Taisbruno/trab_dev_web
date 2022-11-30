@@ -3,6 +3,14 @@ package models;
 public class Especialidade {
     private int id;
     private String descricao;
+    
+    public Especialidade(String descricao){
+        this.descricao = descricao;
+    }
+    
+    public Especialidade() {
+        
+    }
 
     public int getId() {
         return id;

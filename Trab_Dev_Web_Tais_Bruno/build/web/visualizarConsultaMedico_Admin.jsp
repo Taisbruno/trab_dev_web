@@ -13,6 +13,10 @@
 <%@page import="dao.TipoExameDAO"%>
 <%@page import="dao.ExameDAO"%>
 
+<%  
+    Medico medico = (Medico) request.getAttribute("medico");
+%>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -25,13 +29,13 @@
         <title> Clínica Tais Bruno - Lista de Consultas </title>
     </head>
     <body>
-        <%@include file="components/ehMedico.jsp" %>
         <jsp:include page = "components/menu.jsp" />
+        <%@include file="components/ehAdministrador.jsp" %>
         
         <div class="card-title">
                 <div class="card-body" style="padding: 10%; text-align: center;">
                     <h2 class="card-title" style="margin-top: 10px; padding-bottom: 2%; text-align: center">Lista de Consultas</h2>
-                    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="AreaMedico.jsp"><b>Voltar</b></a>
+                    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="cadastraMedicos.jsp"><b>Voltar</b></a>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-secondary" style="margin-top: 20px; margin-bottom: 10px">
             <div class="container">
@@ -89,7 +93,6 @@
                 </table>
             </div>
         </div>
-            
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
         </div>
         </div>

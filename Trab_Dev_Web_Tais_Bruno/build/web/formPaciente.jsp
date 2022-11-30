@@ -1,5 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.TipoPlano"%>
+<%@page import="dao.TipoPlanoDAO"%>
+
+<%  
+    TipoPlanoDAO tipoplanoDAO = new TipoPlanoDAO();
+    ArrayList<TipoPlano> tipoplanos = tipoplanoDAO.getAll();
+%>
+
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
@@ -47,11 +56,14 @@
         <div class="form-group">
             <label for="idtipoplano"><b> Plano </b></label>
             <select class="form-select" id="idtipoplano" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" name="idtipoplano" required>
-            <option value="" disabled selected hidden>Selecione seu Plano</option>
-            <option value=1>Unimed</option>
-            <option value=2>Amil</option>
-            <option value=3>SulAmerica</option>
-            <option value=4>Particular</option>
+            <%
+                for (int index = 0; index < tipoplanos.size(); index++) {
+                    TipoPlano tipoplano = tipoplanos.get(index);           
+            %>
+            <option value="<%= tipoplano.getId() %>"><%= tipoplano.getDescricao() %></option>
+            <%
+                }
+            %>
             </select>
         </div>
         <br>

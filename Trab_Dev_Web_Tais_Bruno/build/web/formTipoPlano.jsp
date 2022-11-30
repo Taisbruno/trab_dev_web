@@ -9,22 +9,24 @@
         <!-- BOOTSTRAP -->
         <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
         
-        <title> Cadastrar o Convênio </title>
+        <title> Cadastrar Tipo do Plano </title>
     </head>
 <body>      
     <jsp:include page = "components/menu.jsp" />
+    <%@include file="components/ehAdministrador.jsp" %>
     
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
-    <h4 class="card-title" style="margin-top: 40px">Cadastrar o Convênio:</h4>
+    <h4 class="card-title" style="margin-top: 40px">Cadastrar Tipo do Plano:</h4>
     <br>
-    <form method="POST" action="ConvenioController">                   
+    <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraTipoPlano.jsp"><b>Voltar</b></a>
+    <form method="POST" action="TipoPlanoController">                   
+        <br>
         <br>
         <div class="form-group" style="margin-top:20px">
-            <label for="convenio"> Convênio </label>
-            <input style="margin-top: 5px; width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="convenio" id="convenio" placeholder="Digite o nome do convênio" required>
+            <label for="tipoplano"><b> Tipo do Plano</b> </label>
+            <input style="margin-top: 5px; width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" placeholder="Digite o nome do tipo do plano" required>
         </div>
         <br>
-        
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Enviar </button>
     </form>
     </div>

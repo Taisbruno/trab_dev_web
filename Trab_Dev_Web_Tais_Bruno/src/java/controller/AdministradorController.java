@@ -19,6 +19,23 @@ public class AdministradorController extends HttpServlet {
             throws ServletException, IOException {
         
             AdministradorDAO administradorDAO = new AdministradorDAO();
+            Administrador administrador = new Administrador();
+            int administradorId;
+            
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "get":
+                    administradorId = Integer.parseInt(request.getParameter("id"));
+                    administrador = administradorDAO.get(administradorId);
+                    
+                    request.setAttribute("administrador", administrador);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarAdministrador.jsp");       
+                    update.forward(request, response);
+                    
+                    break;
+            }
            
     }
     

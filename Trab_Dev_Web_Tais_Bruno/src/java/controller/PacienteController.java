@@ -23,10 +23,26 @@ public class PacienteController extends HttpServlet {
         
         try {
             PacienteDAO pacienteDAO = new PacienteDAO();
-           
+            Paciente paciente = new Paciente();
+            int pacienteId;
+            
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "get":
+                    pacienteId = Integer.parseInt(request.getParameter("id"));
+                    paciente = pacienteDAO.get(pacienteId);
+                    
+                    request.setAttribute("paciente", paciente);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarPaciente.jsp");       
+                    update.forward(request, response);
+                    
+                    break;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PacienteController.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
     }
     
     @Override
@@ -69,5 +85,3 @@ public class PacienteController extends HttpServlet {
         }        
     }
 }
-
-

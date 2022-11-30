@@ -3,6 +3,14 @@ package models;
 public class TipoPlano {
     private int id;
     private String descricao;
+    
+    public TipoPlano(String descricao){
+        this.descricao = descricao;
+    }
+    
+    public TipoPlano() {
+        
+    }
 
     public int getId() {
         return id;

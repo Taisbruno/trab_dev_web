@@ -19,6 +19,33 @@ public class MedicoController extends HttpServlet {
             throws ServletException, IOException {
         
             MedicoDAO medicoDAO = new MedicoDAO();
+            Medico medico = new Medico();
+            int medicoId;
+            
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "get":
+                    medicoId = Integer.parseInt(request.getParameter("id"));
+                    medico = medicoDAO.get(medicoId);
+                    
+                    request.setAttribute("medico", medico);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarMedico.jsp");       
+                    update.forward(request, response);
+                    
+                    break;
+                    
+                case "getAll":
+                    medicoId = Integer.parseInt(request.getParameter("id"));
+                    medico = medicoDAO.get(medicoId);
+                    
+                    request.setAttribute("medico", medico);
+                    RequestDispatcher view = getServletContext().getRequestDispatcher("/visualizarConsultaMedico_Admin.jsp");       
+                    view.forward(request, response);
+                    
+                    break;
+            }
            
     }
     

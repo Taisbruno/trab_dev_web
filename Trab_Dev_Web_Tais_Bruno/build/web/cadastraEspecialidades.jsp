@@ -58,9 +58,9 @@
                             for (int index = 0; index < especialidades.size(); index++) {
                                 Especialidade especialidade = especialidades.get(index);
                                 
-                                String linkUpdate = "EditarConsultaController?action=update&id=" + especialidade.getId();
+                                String linkUpdate = "EditarEspecialidadeController?action=update&id=" + especialidade.getId();
                                 String linkDelete = "RealizarConsultaController?action=update&id=" + especialidade.getId();
-                                String linkVisualizar = "VisualizarConsultaController?action=get&id=" + especialidade.getId();
+                                String linkVisualizar = "EspecialidadeController?action=get&id=" + especialidade.getId();
                         %>
                             <tr>
                                 <td><%= especialidade.getDescricao() %></td>
