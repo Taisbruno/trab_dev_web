@@ -86,6 +86,30 @@ public class PacienteDAO extends HttpServlet {
         return paciente;
     }
     
+    public ArrayList<Paciente> getByTipoPlano(int idTipoPlano) {
+        ArrayList<Paciente> arrayList = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + 
+                    " INNER JOIN tipoplano ON paciente.idtipoplano = tipoplano.id" +
+                    " WHERE idtipoplano = " + String.valueOf(idTipoPlano));
+            
+            while (resultSet.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setId(resultSet.getInt("id"));
+                paciente.setNome(resultSet.getString("nome"));
+                paciente.setCpf(resultSet.getString("cpf"));
+                paciente.setSenha(resultSet.getString("senha"));
+                paciente.setAutorizado(resultSet.getString("autorizado"));
+                paciente.setIdTipoPlano(resultSet.getInt("idtipoplano"));
+                arrayList.add(paciente);
+            }
+            } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return arrayList;
+    }
+    
     public boolean insert(Paciente paciente) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
@@ -127,7 +151,6 @@ public class PacienteDAO extends HttpServlet {
     }
     
     public boolean delete(int id) {
-        
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM " + this.tableName + " WHERE id = " + String.valueOf(id));
             preparedStatement.executeUpdate();

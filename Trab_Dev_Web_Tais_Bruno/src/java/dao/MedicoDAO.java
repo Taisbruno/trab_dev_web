@@ -93,6 +93,32 @@ public class MedicoDAO extends HttpServlet {
         return medico;
     }
     
+    public ArrayList<Medico> getByEspecialidade(int idEspecialidade) {
+        ArrayList<Medico> arrayList = new ArrayList<>();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + 
+                    " INNER JOIN especialidade ON medico.idespecialidade = especialidade.id" +
+                    " WHERE idespecialidade = " + String.valueOf(idEspecialidade));
+            
+            while (resultSet.next()) {
+                Medico medico = new Medico();
+                medico.setId(resultSet.getInt("id"));
+                medico.setNome(resultSet.getString("nome"));
+                medico.setCrm(resultSet.getInt("crm"));
+                medico.setEstadoCrm(resultSet.getString("estadocrm"));
+                medico.setCpf(resultSet.getString("cpf"));
+                medico.setSenha(resultSet.getString("senha"));
+                medico.setAutorizado(resultSet.getString("autorizado"));
+                medico.setIdEspecialidade(resultSet.getInt("idespecialidade"));
+                arrayList.add(medico);
+            }
+            } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return arrayList;
+    }
+    
     public boolean insert(Medico medico) throws SQLException {
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
@@ -159,5 +185,17 @@ public class MedicoDAO extends HttpServlet {
             System.out.println("SQL Error: " + e.getMessage());
         }
         return medico;
+    }
+    
+    public boolean delete(int id) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM " + this.tableName + " WHERE id = " + String.valueOf(id));
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
     }
 }

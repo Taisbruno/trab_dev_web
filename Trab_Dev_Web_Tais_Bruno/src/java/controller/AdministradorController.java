@@ -20,6 +20,7 @@ public class AdministradorController extends HttpServlet {
         
             AdministradorDAO administradorDAO = new AdministradorDAO();
             Administrador administrador = new Administrador();
+            ArrayList<Administrador> administradores;
             int administradorId;
             
             String action = (String) request.getParameter("action");
@@ -35,6 +36,18 @@ public class AdministradorController extends HttpServlet {
                     update.forward(request, response);
                     
                     break;
+                    
+                case "delete":
+                    administradorId = Integer.parseInt(request.getParameter("id"));
+                    administradorDAO.delete(administradorId);
+                
+                    administradores = administradorDAO.getAll();
+                
+                    request.setAttribute("administradores", administradores);
+                    RequestDispatcher delete = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
+                    delete.forward(request, response);
+                
+                break;
             }
            
     }

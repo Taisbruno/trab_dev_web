@@ -61,7 +61,7 @@
                                 Administrador administradorr = administradores.get(index);
                                 
                                 String linkUpdate = "EditarAdministradorController?action=update&id=" + administradorr.getId();
-                                String linkDelete = "RealizarConsultaController?action=update&id=" + administradorr.getId();
+                                String linkDelete = "AdministradorController?action=delete&id=" + administradorr.getId();
                                 String linkVisualizar = "AdministradorController?action=get&id=" + administradorr.getId();
                         %>
                             <tr>

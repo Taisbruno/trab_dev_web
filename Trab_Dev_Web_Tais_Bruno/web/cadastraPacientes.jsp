@@ -65,7 +65,7 @@
                                 Paciente paciente = pacientes.get(index);
                                 
                                 String linkUpdate = "EditarPacienteController?action=update&id=" + paciente.getId();
-                                String linkDelete = "RealizarConsultaController?action=update&id=" + paciente.getId();
+                                String linkDelete = "PacienteController?action=delete&id=" + paciente.getId();
                                 String linkVisualizar = "PacienteController?action=get&id=" + paciente.getId();
                         %>
                             <tr>

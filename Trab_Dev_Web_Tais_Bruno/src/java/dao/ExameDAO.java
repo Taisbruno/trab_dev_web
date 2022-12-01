@@ -134,4 +134,16 @@ public class ExameDAO extends HttpServlet {
         return exames;
     }
     
+    public boolean delete(int id) {
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement("DELETE FROM " + this.tableName + " WHERE id = " + String.valueOf(id));
+            preparedStatement.executeUpdate();
+
+            return true;
+        } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }

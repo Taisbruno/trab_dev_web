@@ -61,7 +61,7 @@
                                 TipoPlano tipoplano = tipoplanos.get(index);
                                 
                                 String linkUpdate = "EditarTipoPlanoController?action=update&id=" + tipoplano.getId();
-                                String linkDelete = "RealizarConsultaController?action=update&id=" + tipoplano.getId();
+                                String linkDelete = "TipoPlanoController?action=delete&id=" + tipoplano.getId();
                                 String linkVisualizar = "TipoPlanoController?action=get&id=" + tipoplano.getId();
                         %>
                             <tr>

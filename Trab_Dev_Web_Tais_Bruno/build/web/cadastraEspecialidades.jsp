@@ -59,7 +59,7 @@
                                 Especialidade especialidade = especialidades.get(index);
                                 
                                 String linkUpdate = "EditarEspecialidadeController?action=update&id=" + especialidade.getId();
-                                String linkDelete = "RealizarConsultaController?action=update&id=" + especialidade.getId();
+                                String linkDelete = "EspecialidadeController?action=delete&id=" + especialidade.getId();
                                 String linkVisualizar = "EspecialidadeController?action=get&id=" + especialidade.getId();
                         %>
                             <tr>
