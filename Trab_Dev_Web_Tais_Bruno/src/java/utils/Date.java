@@ -57,7 +57,25 @@ public class Date {
                 }
                                 
                 break;
+                
+            case "brazilonlyDate":   
+                if (date != null) {
+                    splitDate = date.split("-");
+
+                    year = splitDate[0];
+                    month = splitDate[1];
+                    day = splitDate[2];
+                    
+                    splitHour = day.split(" ");
+                    data = splitHour[0];
+                    hour = splitHour[1];
+                            
+                    resultWithHour = String.join("/", data, month, year); // [dd/mm/yyyy]
+                   
+                }
+                break;
         }
+        
         return resultWithHour;
     }    
 }
