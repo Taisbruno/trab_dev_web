@@ -1,7 +1,6 @@
 package controller;
 
 import dao.ConsultaDAO;
-import dao.MedicoDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -15,14 +14,31 @@ import models.Consulta;
 import utils.Date;
 
 
-@WebServlet(urlPatterns = {"/MarcarConsultaController"})
-public class MarcarConsultaController extends HttpServlet {
+@WebServlet(name = "ConsultaController", urlPatterns = {"/ConsultaController"})
+public class ConsultaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        MedicoDAO medicoDAO = new MedicoDAO();
+            ConsultaDAO consultaDAO = new ConsultaDAO();
+            Consulta consulta = new Consulta();
+            int consultaId;
+
+            String action = (String) request.getParameter("action");
+
+            switch (action) {
+
+                case "get":
+                    consultaId = Integer.parseInt(request.getParameter("id"));
+                    consulta = consultaDAO.get(consultaId);
+
+                    request.setAttribute("consultasMedico", consulta);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarConsulta.jsp");
+                    update.forward(request, response);
+
+                    break;
+        } 
     }
 
     @Override

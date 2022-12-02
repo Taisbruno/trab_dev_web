@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>ConsultaController</servlet-name>
-        <servlet-class>controller.ListaConsultaPacienteController</servlet-class>
+        <servlet-class>controller.ConsultaController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ExameController</servlet-name>
@@ -31,10 +31,6 @@
     <servlet>
         <servlet-name>TipoExameController</servlet-name>
         <servlet-class>controller.TipoExameController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LoginController1</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>

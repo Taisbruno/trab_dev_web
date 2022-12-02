@@ -68,7 +68,7 @@
                                 
                                 String linkUpdate = "EditarConsultaController?action=update&id=" + consulta.getId();
                                 String linkRealizar = "RealizarConsultaController?action=update&id=" + consulta.getId();
-                                String linkVisualizar = "VisualizarConsultaController?action=get&id=" + consulta.getId();
+                                String linkVisualizar = "ConsultaController?action=get&id=" + consulta.getId();
                         %>
                             <tr>
                                 <td><%= medico.getNome() %></td>
