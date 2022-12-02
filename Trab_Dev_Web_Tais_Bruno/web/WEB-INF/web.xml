@@ -28,10 +28,6 @@
         <servlet-name>EspecialidadeController</servlet-name>
         <servlet-class>controller.EspecialidadeController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>TipoExameController</servlet-name>
-        <servlet-class>controller.TipoExameController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -59,10 +55,6 @@
     <servlet-mapping>
         <servlet-name>EspecialidadeController</servlet-name>
         <url-pattern>/EspecialidadeController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>TipoExameController</servlet-name>
-        <url-pattern>/TipoExameController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

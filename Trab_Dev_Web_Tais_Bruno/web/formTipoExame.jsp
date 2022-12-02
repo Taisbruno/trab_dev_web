@@ -17,7 +17,7 @@
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
     <h4 class="card-title" style="margin-top: 40px">Cadastrar tipo do Exame:</h4>
     <br>
-    <form method="POST" action="TipoExameController">                   
+    <form method="POST" action="ExameController">                   
         <br>
         <div class="form-group" style="margin-top:20px">
             <label for="tipoexame">Tipo do Exame</label>

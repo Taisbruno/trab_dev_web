@@ -72,7 +72,7 @@
                             for (int index = 0; index < medicos.size(); index++) {
                                 Medico medico = medicos.get(index);
                                 
-                                String linkUpdate = "EditarMedicoController?action=update&id=" + medico.getId();
+                                String linkUpdate = "MedicoController?action=update&id=" + medico.getId();
                                 String linkDelete = "MedicoController?action=delete&id=" + medico.getId();
                                 String linkVisualizar = "MedicoController?action=get&id=" + medico.getId();
                                 String linkVisualizarConsultas = "MedicoController?action=getAll&id=" + medico.getId();

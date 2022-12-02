@@ -19,7 +19,8 @@
     <h4 class="card-title" style="margin-top: 40px">Cadastrar Especialidade:</h4>
     <br>
     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraEspecialidades.jsp"><b>Voltar</b></a>
-    <form method="POST" action="EspecialidadeController">           
+    <form method="POST" action="EspecialidadeController?action=insert">        
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id">
         <br>
         <br>
         <div class="form-group" style="margin-top:30px">

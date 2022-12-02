@@ -32,8 +32,8 @@ public class AdministradorController extends HttpServlet {
                     administrador = administradorDAO.get(administradorId);
                     
                     request.setAttribute("administrador", administrador);
-                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarAdministrador.jsp");       
-                    update.forward(request, response);
+                    RequestDispatcher get = getServletContext().getRequestDispatcher("/visualizarAdministrador.jsp");       
+                    get.forward(request, response);
                     
                     break;
                     
@@ -47,7 +47,17 @@ public class AdministradorController extends HttpServlet {
                     RequestDispatcher delete = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
                     delete.forward(request, response);
                 
-                break;
+                    break;
+                
+                case "update":
+                    administradorId = Integer.parseInt(request.getParameter("id"));
+                    administrador = administradorDAO.get(administradorId);
+                    
+                    request.setAttribute("administrador", administrador);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/formEditarAdministrador.jsp");
+                    update.forward(request, response);       
+                    
+                    break;
             }
            
     }
@@ -56,33 +66,55 @@ public class AdministradorController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        AdministradorDAO administradorDAO = new AdministradorDAO();
-        request.setCharacterEncoding("UTF-8");
-        
-        String nome = request.getParameter("nome");
-        String cpf = request.getParameter("cpf");
-        String senha = request.getParameter("senha");
-        Administrador administrador = new Administrador(nome, cpf, senha);
-        
-        try {
-            administradorDAO.insert(administrador);
-        } catch (Exception e) {
-            throw new RuntimeException("Falha no cadastro do administrador");
-        } finally {
-            ArrayList<Administrador> administradores;
-            administradores = administradorDAO.getAll();
+            AdministradorDAO administradorDAO = new AdministradorDAO();
+            request.setCharacterEncoding("UTF-8");
             
-        if (administrador != null) {
-            request.setAttribute("administradores", administradores);
-            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-            list.forward(request, response);
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "insert":
+                    String nome = request.getParameter("nome");
+                    String cpf = request.getParameter("cpf");
+                    String senha = request.getParameter("senha");
+                    Administrador administrador = new Administrador(nome, cpf, senha);
 
-        } else {
-            request.setAttribute("msgError", "Erro");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
-            rd.forward(request, response);
-        }
-        }        
+                    try {
+                        administradorDAO.insert(administrador);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Falha no cadastro do administrador");
+                    } finally {
+                        ArrayList<Administrador> administradores;
+                        administradores = administradorDAO.getAll();
+
+                    if (administrador != null) {
+                        request.setAttribute("administradores", administradores);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        list.forward(request, response);
+
+                    } else {
+                        request.setAttribute("msgError", "Erro");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
+                        rd.forward(request, response);
+                    }
+                    }
+                    break;
+                    
+                case "update":
+                    Administrador administradorr = new Administrador();
+                    
+                    administradorr.setId(Integer.parseInt(request.getParameter("id")));
+                    administradorr.setNome(request.getParameter("nome"));
+                    administradorr.setCpf(request.getParameter("cpf"));
+                    administradorr.setSenha(request.getParameter("senha"));
+                    administradorDAO.update(administradorr);
+            
+                    request.setAttribute("administrador", administradorr);
+                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
+                    list.forward(request, response);
+                    
+                    break;
+            }
     }
 }
 

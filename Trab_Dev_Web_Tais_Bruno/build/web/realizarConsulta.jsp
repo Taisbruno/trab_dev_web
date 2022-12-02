@@ -66,8 +66,8 @@
                             for (int index = 0; index < consultas.size(); index++) {
                                 Consulta consulta = consultas.get(index);
                                 
-                                String linkUpdate = "EditarConsultaController?action=update&id=" + consulta.getId();
-                                String linkRealizar = "RealizarConsultaController?action=update&id=" + consulta.getId();
+                                String linkUpdate = "ConsultaController?action=update&id=" + consulta.getId();
+                                String linkRealizar = "ConsultaController?action=realizar&id=" + consulta.getId();
                                 String linkVisualizar = "ConsultaController?action=get&id=" + consulta.getId();
                         %>
                             <tr>

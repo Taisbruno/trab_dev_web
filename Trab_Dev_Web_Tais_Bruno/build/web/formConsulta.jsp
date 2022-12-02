@@ -33,7 +33,7 @@
         <h4 class="card-title" style="margin-top: 40px; margin-bottom: 40px">Marcar Consulta:</h4>
         <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="AreaPaciente.jsp"><b>Voltar</b></a>
         <br>
-     <form method="POST" action="ConsultaController">
+     <form method="POST" action="ConsultaController?action=marcar">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idconsulta" id="idconsulta" >
             
         <div class="form-group">

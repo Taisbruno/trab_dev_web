@@ -69,6 +69,16 @@ public class EspecialidadeController extends HttpServlet {
                     delete.forward(request, response);
                 
                 break;
+                
+                case "update":
+                    especialidadeId = Integer.parseInt(request.getParameter("id"));
+                    especialidade = especialidadeDAO.get(especialidadeId);
+                    
+                    request.setAttribute("especialidade", especialidade);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/formEditarEspecialidade.jsp");
+                    update.forward(request, response);       
+                    
+                    break;
             }
     }
     
@@ -78,30 +88,49 @@ public class EspecialidadeController extends HttpServlet {
         
             EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
             request.setCharacterEncoding("UTF-8");
+            
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "insert":
+                    String descricao = request.getParameter("descricao");
+                    Especialidade especialidade = new Especialidade(descricao);
+                    
+                    try {
+                        especialidadeDAO.insert(especialidade);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Falha no cadastro da Especialidade");
+                    } finally {
+                        ArrayList<Especialidade> especialidades;
+                        especialidades = especialidadeDAO.getAll();
 
-            String descricao = request.getParameter("descricao");
+                    if (especialidade != null) {
+                        request.setAttribute("especialidades", especialidades);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        list.forward(request, response);
 
-            Especialidade especialidade = new Especialidade(descricao);
-
-            try {
-                especialidadeDAO.insert(especialidade);
-            } catch (Exception e) {
-                throw new RuntimeException("Falha no cadastro da Especialidade");
-            } finally {
-                ArrayList<Especialidade> especialidades;
-                especialidades = especialidadeDAO.getAll();
-
-            if (especialidade != null) {
-                request.setAttribute("especialidades", especialidades);
-                RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                list.forward(request, response);
-
-            } else {
-                request.setAttribute("msgError", "Erro");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
-                rd.forward(request, response);
+                    } else {
+                        request.setAttribute("msgError", "Erro");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
+                        rd.forward(request, response);
+                    }
+                    } 
+                        break;
+                        
+                case "update":
+                    Especialidade especialidadee = new Especialidade();
+           
+                    especialidadee.setId(Integer.parseInt(request.getParameter("id")));
+                    especialidadee.setDescricao(request.getParameter("descricao"));
+                    especialidadeDAO.update(especialidadee);
+            
+                    request.setAttribute("especialidade", especialidadee);
+                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
+                    list.forward(request, response);
+                    
+                    break;
             }
-            } 
     }
 }
 

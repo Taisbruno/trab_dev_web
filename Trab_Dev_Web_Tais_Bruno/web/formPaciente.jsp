@@ -33,7 +33,7 @@
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Paciente:</h4>  
     <br>
 
-    <form method="POST" action="PacienteController">
+    <form method="POST" action="PacienteController?action=insert">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idpaciente" id="idpaciente" >
         
         <div class="form-group">

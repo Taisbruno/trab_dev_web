@@ -35,7 +35,7 @@
     <div class="rounded border border-dark p-4 m-5" style="padding: 10px; text-align: center">
         <h4 class="card-title" style="margin-top: 40px; margin-bottom: 50px;">Editar Consulta:</h4>
         <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="realizarConsulta.jsp"><b>Voltar</b></a>  
-     <form method="POST" action="EditarConsultaController">   
+     <form method="POST" action="ConsultaController?action=update">   
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
         <div class="form-group">
             <br>

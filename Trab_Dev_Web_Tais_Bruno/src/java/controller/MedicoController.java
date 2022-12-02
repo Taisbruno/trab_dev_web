@@ -38,8 +38,8 @@ public class MedicoController extends HttpServlet {
                     medico = medicoDAO.get(medicoId);
                     
                     request.setAttribute("medico", medico);
-                    RequestDispatcher update = getServletContext().getRequestDispatcher("/visualizarMedico.jsp");       
-                    update.forward(request, response);
+                    RequestDispatcher get = getServletContext().getRequestDispatcher("/visualizarMedico.jsp");       
+                    get.forward(request, response);
                     
                     break;
                     
@@ -71,7 +71,17 @@ public class MedicoController extends HttpServlet {
                     RequestDispatcher delete = getServletContext().getRequestDispatcher("/cadastraMedicos.jsp");
                     delete.forward(request, response);
                 
-                break;
+                    break;
+                    
+                case "update":
+                    medicoId = Integer.parseInt(request.getParameter("id"));
+                    medico = medicoDAO.get(medicoId);
+                    
+                    request.setAttribute("medico", medico);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/formEditarMedico.jsp");
+                    update.forward(request, response);       
+                    
+                    break;
             }
            
     }
@@ -82,35 +92,63 @@ public class MedicoController extends HttpServlet {
         
             MedicoDAO medicoDAO = new MedicoDAO();
             request.setCharacterEncoding("UTF-8");
+            
+            String action = (String) request.getParameter("action");
+            
+            switch (action) {
+                
+                case "insert":
+                    
+                    String nome = request.getParameter("nome");
+                    int crm = Integer.parseInt(request.getParameter("crm"));
+                    String estadocrm = request.getParameter("estadocrm");
+                    String cpf = request.getParameter("cpf");
+                    String senha = request.getParameter("senha");
+                    String autorizado = request.getParameter("autorizado");
+                    int idespecialidade = Integer.parseInt(request.getParameter("idespecialidade"));
+                    Medico medico = new Medico(nome, crm, estadocrm, cpf, senha, autorizado, idespecialidade);
 
-            String nome = request.getParameter("nome");
-            int crm = Integer.parseInt(request.getParameter("crm"));
-            String estadocrm = request.getParameter("estadocrm");
-            String cpf = request.getParameter("cpf");
-            String senha = request.getParameter("senha");
-            String autorizado = request.getParameter("autorizado");
-            int idespecialidade = Integer.parseInt(request.getParameter("idespecialidade"));
-            Medico medico = new Medico(nome, crm, estadocrm, cpf, senha, autorizado, idespecialidade);
+                    try {
+                        medicoDAO.insert(medico);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Falha no cadastro do médico");
+                    } finally {
+                        ArrayList<Medico> medicos;
+                        medicos = medicoDAO.getAll();
 
-            try {
-                medicoDAO.insert(medico);
-            } catch (Exception e) {
-                throw new RuntimeException("Falha no cadastro do médico");
-            } finally {
-                ArrayList<Medico> medicos;
-                medicos = medicoDAO.getAll();
+                    if (medico != null) {
+                        request.setAttribute("medicos", medicos);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        list.forward(request, response);
 
-            if (medico != null) {
-                request.setAttribute("medicos", medicos);
-                RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                list.forward(request, response);
+                    } else {
+                        request.setAttribute("msgError", "Erro");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formMedico.jsp");
+                        rd.forward(request, response);
+                    }
+                    } 
+                    break;
+                    
+                case "update":
+                    
+                    Medico medicoo = new Medico();
+                    
+                    medicoo.setId(Integer.parseInt(request.getParameter("id")));
+                    medicoo.setNome(request.getParameter("nome"));
+                    medicoo.setCrm(Integer.parseInt(request.getParameter("crm")));
+                    medicoo.setEstadoCrm(request.getParameter("estadocrm"));
+                    medicoo.setCpf(request.getParameter("cpf"));
+                    medicoo.setSenha(request.getParameter("senha"));
+                    medicoo.setAutorizado(request.getParameter("autorizado"));
+                    medicoo.setIdEspecialidade(Integer.parseInt(request.getParameter("idespecialidade")));
+                    medicoDAO.update(medicoo);
 
-            } else {
-                request.setAttribute("msgError", "Erro");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/formMedico.jsp");
-                rd.forward(request, response);
+                    request.setAttribute("medico", medicoo);
+                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraMedicos.jsp");
+                    list.forward(request, response);
+                    
+                    break;
             }
-            }        
     }
 }
 

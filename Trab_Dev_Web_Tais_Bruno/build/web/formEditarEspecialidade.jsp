@@ -25,7 +25,7 @@
         <br>
         <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="cadastraEspecialidades.jsp"><b>Voltar</b></a>  
     <br>
-    <form method="POST" action="EditarEspecialidadeController">
+    <form method="POST" action="EspecialidadeController?action=update">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= especialidade.getId() %>">
         <br>
         <br>

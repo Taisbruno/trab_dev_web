@@ -73,6 +73,16 @@ public class TipoPlanoController extends HttpServlet {
                     delete.forward(request, response);
                     
                     break;
+                    
+                case "update":
+                    tipoplanoId = Integer.parseInt(request.getParameter("id"));
+                    tipoplano = tipoplanoDAO.get(tipoplanoId);
+                    
+                    request.setAttribute("tipoplano", tipoplano);
+                    RequestDispatcher update = getServletContext().getRequestDispatcher("/formEditarTipoPlano.jsp");
+                    update.forward(request, response);       
+                    
+                    break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(TipoPlanoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -84,32 +94,50 @@ public class TipoPlanoController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        TipoPlanoDAO tipoplanoDAO = new TipoPlanoDAO();
-        request.setCharacterEncoding("UTF-8");
+            TipoPlanoDAO tipoplanoDAO = new TipoPlanoDAO();
+            request.setCharacterEncoding("UTF-8");
         
-        String descricao = request.getParameter("descricao");
-        
-        TipoPlano tipoplano = new TipoPlano(descricao);
-        
-        try {
-            tipoplanoDAO.insert(tipoplano);
-        } catch (Exception e) {
-            throw new RuntimeException("Falha no cadastro do Tipo do Plano");
-        } finally {
-            ArrayList<TipoPlano> tipoplanos;
-            tipoplanos = tipoplanoDAO.getAll();
+            String action = (String) request.getParameter("action");
             
-        if (tipoplano != null) {
-            request.setAttribute("tipoplanos", tipoplanos);
-            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-            list.forward(request, response);
+            switch (action) {
+                
+                case "insert":
+                    String descricao = request.getParameter("descricao");
+                    TipoPlano tipoplano = new TipoPlano(descricao);
+        
+                    try {
+                        tipoplanoDAO.insert(tipoplano);
+                    } catch (Exception e) {
+                        throw new RuntimeException("Falha no cadastro do Tipo do Plano");
+                    } finally {
+                        ArrayList<TipoPlano> tipoplanos;
+                        tipoplanos = tipoplanoDAO.getAll();
+            
+                    if (tipoplano != null) {
+                        request.setAttribute("tipoplanos", tipoplanos);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        list.forward(request, response);
 
-        } else {
-            request.setAttribute("msgError", "Erro");
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/formTipoPlano.jsp");
-            rd.forward(request, response);
+                    } else {
+                        request.setAttribute("msgError", "Erro");
+                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formTipoPlano.jsp");
+                        rd.forward(request, response);
+                    }
+                    }  
+                    break;
+                    
+                case "update": 
+                    TipoPlano tipoplanoo = new TipoPlano();
+           
+                    tipoplanoo.setId(Integer.parseInt(request.getParameter("id")));
+                    tipoplanoo.setDescricao(request.getParameter("descricao"));
+                    tipoplanoDAO.update(tipoplanoo);
+
+                    request.setAttribute("tipoplano", tipoplanoo);
+                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraTipoPlano.jsp");
+                    list.forward(request, response);
         }
-        }        
+             
     }
 }
 

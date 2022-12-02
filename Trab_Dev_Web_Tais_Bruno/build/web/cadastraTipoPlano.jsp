@@ -60,7 +60,7 @@
                             for (int index = 0; index < tipoplanos.size(); index++) {
                                 TipoPlano tipoplano = tipoplanos.get(index);
                                 
-                                String linkUpdate = "EditarTipoPlanoController?action=update&id=" + tipoplano.getId();
+                                String linkUpdate = "TipoPlanoController?action=update&id=" + tipoplano.getId();
                                 String linkDelete = "TipoPlanoController?action=delete&id=" + tipoplano.getId();
                                 String linkVisualizar = "TipoPlanoController?action=get&id=" + tipoplano.getId();
                         %>

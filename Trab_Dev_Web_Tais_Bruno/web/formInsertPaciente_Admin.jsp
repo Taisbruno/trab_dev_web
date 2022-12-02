@@ -29,7 +29,10 @@
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Paciente:</h4>  
     <br>
     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraPacientes.jsp"><b>Voltar</b></a>
-    <form method="POST" action="PacienteController">
+    <br>
+    <br>
+    <br>
+    <form method="POST" action="PacienteController?action=insert">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idpaciente" id="idpaciente" >
         
         <div class="form-group">

@@ -69,8 +69,7 @@
                     %>
                 </table>
             </div>
-        </div>
-            
+        </div> 
         <script src="bootstrap/bootstrap.bundle.min.js"></script>
         </div>
         </div>

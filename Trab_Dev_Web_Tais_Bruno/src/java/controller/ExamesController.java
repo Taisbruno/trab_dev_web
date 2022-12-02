@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import models.Consulta;
 import dao.ConsultaDAO;
 
-@WebServlet(name = "ListaExamesController", urlPatterns = {"/ListaExamesController"})
-public class ListaExamesController extends HttpServlet {
+@WebServlet(name = "ExamesController", urlPatterns = {"/ExamesController"})
+public class ExamesController extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

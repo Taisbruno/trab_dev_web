@@ -19,7 +19,7 @@
     <h4 class="card-title" style="margin-top: 40px">Cadastrar Tipo do Plano:</h4>
     <br>
     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraTipoPlano.jsp"><b>Voltar</b></a>
-    <form method="POST" action="TipoPlanoController">                   
+    <form method="POST" action="TipoPlanoController?action=insert">                   
         <br>
         <br>
         <div class="form-group" style="margin-top:20px">

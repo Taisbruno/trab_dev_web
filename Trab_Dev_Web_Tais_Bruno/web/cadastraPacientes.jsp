@@ -64,7 +64,7 @@
                             for (int index = 0; index < pacientes.size(); index++) {
                                 Paciente paciente = pacientes.get(index);
                                 
-                                String linkUpdate = "EditarPacienteController?action=update&id=" + paciente.getId();
+                                String linkUpdate = "PacienteController?action=update&id=" + paciente.getId();
                                 String linkDelete = "PacienteController?action=delete&id=" + paciente.getId();
                                 String linkVisualizar = "PacienteController?action=get&id=" + paciente.getId();
                         %>

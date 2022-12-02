@@ -35,7 +35,7 @@
                 <div class="thumb"></div>
                 <div class="info" style="justify-content: center; text-align: center">
                     <div>
-                        <h3 class="card-title" style="margin-top: 60px"> Convênios aceitos:</h3> 
+                        <h3 class="card-title" style="margin-top: 60px"> Planos aceitos:</h3> 
                     </div>
                     <br>
                     <p>SulAmerica</p>
