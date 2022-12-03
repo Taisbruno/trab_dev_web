@@ -70,7 +70,6 @@
         <div class="form-group">
         <input style="vertical-align: -2px; margin-left: 2px" type="hidden" class="form-control" name="autorizado" value="S" id="autorizado" >
         </div>
-        
         <button type="submit" class="btn btn-dark" style="margin-top: 30px; margin-bottom: 30px"><i class="fas fa-save"></i> Salvar </button>
     </form>
     </div>

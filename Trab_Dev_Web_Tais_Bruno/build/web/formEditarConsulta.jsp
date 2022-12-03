@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
             <label for="descricao"><b> Descrição </b></label>
-            <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>">
+            <input style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>
         </div>
         <br>
         <input type="hidden" style="width:300px; height: 50px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="realizada" id="realizada" value="<%= consulta.getRealizada()%>">

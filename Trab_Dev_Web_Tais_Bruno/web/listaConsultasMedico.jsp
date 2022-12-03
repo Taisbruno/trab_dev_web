@@ -68,7 +68,7 @@
                         <%
                             for (int index = 0; index < consultas.size(); index++) {
                                 Consulta consulta = consultas.get(index); 
-                                String linkExames = "ExamesController?action=getlistamedico&id=" + consulta.getId();
+                                String linkExames = "ConsultaController?action=getlistamedico&id=" + consulta.getId();
 
                         %>
                             <tr>

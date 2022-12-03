@@ -31,7 +31,7 @@
         <br>
         <div class="form-group" style="margin-top:20px">
             <label for="especialidade"><b> Especialidade </b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="descricao" name="descricao" value="<%= especialidade.getDescricao() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="descricao" name="descricao" value="<%= especialidade.getDescricao() %>" required>
         </div>
         <br>
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Enviar </button>

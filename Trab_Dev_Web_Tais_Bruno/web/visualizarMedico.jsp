@@ -48,7 +48,7 @@
         </div>
         <br>
         <div class="form-group">
-        <label for="cpf"><b> CPF </b> </label>
+        <label for="cpf"><b> CPF </b></label>
         <label style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control"><%= medico.getCpf()%></label>
         </div>
         <br>

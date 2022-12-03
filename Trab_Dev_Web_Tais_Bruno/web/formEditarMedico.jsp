@@ -35,13 +35,14 @@
             <br>
             <br>
             <label for="nome"><b>Nome do Médico</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= medico.getNome() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= medico.getNome() %>" required>
             <br>
             <label for="nome"><b>CRM</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="crm" name="crm" value="<%= medico.getCrm() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="crm" name="crm" value="<%= medico.getCrm() %>" required>
             <br>
             <label for="estadocrm"><b>Estado do CRM</b></label>
             <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center;" class="form-select" id="estadocrm" name="estadocrm" required>
+            <option hidden value="<%= medico.getEstadoCrm() %>"><%= medico.getEstadoCrm() %></option>
             <option value="AC">Acre</option>
             <option value="AL">Alagoas</option>
             <option value="AP">Amapá</option>
@@ -73,10 +74,10 @@
             </select>
             <br>
             <label for="cpf"><b>CPF</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= medico.getCpf() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= medico.getCpf() %>" required>
              <br>
              <label for="senha"><b>Senha</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="senha" id="senha" value="<%= medico.getSenha() %>" >
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="senha" id="senha" value="<%= medico.getSenha() %>" required>
         </div>
         <br>
         <div class="form-group">
@@ -88,7 +89,8 @@
         <br>
         </div>
         <label for="idespecialidade"><b>Especialidade</b></label>
-        <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" name="idespecialidade" id="idespecialidade"> 
+        <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-select" name="idespecialidade" id="idespecialidade" required>
+            <option hidden value="<%= medico.getIdEspecialidade() %>"><%= especialidadeDAO.get(medico.getIdEspecialidade()).getDescricao() %></option>
             <%
                 for (int index = 0; index < especialidades.size(); index++) {
                     Especialidade especialidade = especialidades.get(index);           

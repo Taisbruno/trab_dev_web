@@ -112,7 +112,7 @@ public class LoginController extends HttpServlet {
                     login.forward(request, response);
                     
                 } else {
-                    message = "Paciente/Medico/Administrador Não Encontrado ou Não Autorizado";
+                    message = "Paciente/Médico/Administrador Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
                     request.setAttribute("error", 1);  
                     request.setAttribute("message", message);
                     RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");

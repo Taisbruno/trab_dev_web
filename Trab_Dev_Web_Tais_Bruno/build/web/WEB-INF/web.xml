@@ -21,10 +21,6 @@
         <servlet-class>controller.ConsultaController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ExameController</servlet-name>
-        <servlet-class>controller.ExameController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>EspecialidadeController</servlet-name>
         <servlet-class>controller.EspecialidadeController</servlet-class>
     </servlet>
@@ -47,10 +43,6 @@
     <servlet-mapping>
         <servlet-name>ConsultaController</servlet-name>
         <url-pattern>/ConsultaController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ExameController</servlet-name>
-        <url-pattern>/ExameController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EspecialidadeController</servlet-name>

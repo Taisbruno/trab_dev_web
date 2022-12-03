@@ -30,13 +30,13 @@
             <br>
             <br>
             <label for="nome"><b>Nome do Administrador</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= administradorrr.getNome() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= administradorrr.getNome() %>" required>
             <br>
             <label for="cpf"><b>CPF</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= administradorrr.getCpf() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= administradorrr.getCpf() %>" required>
              <br>
              <label for="senha"><b>Senha</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="senha" id="senha" value="<%= administradorrr.getSenha() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="senha" id="senha" value="<%= administradorrr.getSenha() %>" required>
         </div>
         <br>
         <button type="submit" class="btn btn-dark" style="margin-top: 40px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>

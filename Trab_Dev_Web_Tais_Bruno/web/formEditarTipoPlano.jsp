@@ -26,12 +26,12 @@
         <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 50px; text-align: center" href="cadastraTipoPlano.jsp"><b>Voltar</b></a>  
     <br>
     <form method="POST" action="TipoPlanoController?action=update">
-        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= tipoplano.getId() %>">
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= tipoplano.getId() %>" >
         <br>
         <br>
         <div class="form-group" style="margin-top:20px">
             <label for="tipoplano"><b> Tipo do Plano</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="descricao" name="descricao" value="<%= tipoplano.getDescricao() %>">
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="descricao" name="descricao" value="<%= tipoplano.getDescricao() %>" required>
         </div>
         <br>
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Enviar </button>
