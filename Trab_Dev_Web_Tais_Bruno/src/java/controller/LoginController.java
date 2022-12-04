@@ -110,7 +110,7 @@ public class LoginController extends HttpServlet {
                         message = "Paciente Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
                         request.setAttribute("error", 1);  
                         request.setAttribute("message", message);
-                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/loginPaciente.jsp");
                         loginFailed.forward(request, response);
                     
                     }               
@@ -137,7 +137,7 @@ public class LoginController extends HttpServlet {
                         message = "Médico Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
                         request.setAttribute("error", 1);  
                         request.setAttribute("message", message);
-                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/loginMedico.jsp");
                         loginFailed.forward(request, response);
                     }
                 } catch(IOException | NumberFormatException | ServletException e) {
@@ -164,7 +164,7 @@ public class LoginController extends HttpServlet {
                         message = "Administrador Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
                         request.setAttribute("error", 1);  
                         request.setAttribute("message", message);
-                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/loginAdmin.jsp");
                         loginFailed.forward(request, response);
                     
                     }
