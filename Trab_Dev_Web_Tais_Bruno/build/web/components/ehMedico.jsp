@@ -5,6 +5,6 @@
     Medico medico = (Medico) session.getAttribute("medico");
     
     if (medico == null) {
-        response.sendRedirect("LoginController?action=login");
+        response.sendRedirect("LoginController?action=loginmedico");
     }
 %>

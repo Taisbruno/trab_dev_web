@@ -5,6 +5,6 @@
     Paciente paciente = (Paciente) session.getAttribute("paciente");
     
     if (paciente == null) {
-        response.sendRedirect("LoginController?action=login");
+        response.sendRedirect("LoginController?action=loginpaciente");
     }
 %>

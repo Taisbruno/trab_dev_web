@@ -28,7 +28,7 @@
     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="index.jsp"><b>Voltar</b></a>
     <h4 class="card-title" style="margin-top: 50px">Já possui cadastro?</h4>  
     <br>
-        <a class="nav-link" href="login.jsp" style="text-decoration: underline">Login</a>
+    <a class="btn btn-outline-dark my-2 my-sm-0" href="loginPaciente.jsp" style="margin-bottom: 60px; text-align: center"><b>Login</b></a>
     <br>
     <h4 class="card-title" style="margin-top: 40px; margin-bottom: 20px">Cadastro - Paciente:</h4>  
     <br>

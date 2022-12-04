@@ -5,6 +5,6 @@
     Administrador administrador = (Administrador) session.getAttribute("administrador");
     
     if (administrador == null) {
-        response.sendRedirect("LoginController?action=login");
+        response.sendRedirect("LoginController?action=loginadmin");
     }
 %>

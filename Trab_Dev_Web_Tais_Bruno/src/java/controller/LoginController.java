@@ -29,28 +29,42 @@ public class LoginController extends HttpServlet {
         String action = (String) request.getParameter("action");
         
         switch (action) {
-            case "login":
+            case "loginpaciente":
                 if (session.getAttribute("paciente") != null) {
                     Paciente paciente = (Paciente) session.getAttribute("paciente");
                     session.setAttribute("paciente", paciente);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
-                    login.forward(request, response);
+                    RequestDispatcher loginpaciente = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
+                    loginpaciente.forward(request, response);
                     
-                } else if (session.getAttribute("administrador") != null) {
-                    Administrador administrador = (Administrador) session.getAttribute("administrador");
-                    session.setAttribute("administrador", administrador);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                    login.forward(request, response);
-                    
-                } else if (session.getAttribute("medico") != null) {
+                }
+                RequestDispatcher loginpaciente = getServletContext().getRequestDispatcher("/loginPaciente.jsp");
+                loginpaciente.forward(request, response);
+                
+                break;
+            
+            case "loginmedico":
+                if (session.getAttribute("medico") != null) {
                     Medico medico = (Medico) session.getAttribute("medico");
                     session.setAttribute("medico", medico);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
-                    login.forward(request, response);
+                    RequestDispatcher loginmedico = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
+                    loginmedico.forward(request, response);
                     
                 } 
-                RequestDispatcher login = getServletContext().getRequestDispatcher("/login.jsp");
-                login.forward(request, response);
+                RequestDispatcher loginmedico = getServletContext().getRequestDispatcher("/loginMedico.jsp");
+                loginmedico.forward(request, response);
+                
+                break;
+                
+            case "loginadmin":
+                if (session.getAttribute("administrador") != null) {
+                    Administrador administrador = (Administrador) session.getAttribute("administrador");
+                    session.setAttribute("administrador", administrador);
+                    RequestDispatcher loginadmin = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                    loginadmin.forward(request, response);
+                }
+                    
+                RequestDispatcher loginadmin = getServletContext().getRequestDispatcher("/loginAdmin.jsp");
+                loginadmin.forward(request, response);
                 
                 break;
                 
@@ -70,49 +84,95 @@ public class LoginController extends HttpServlet {
         
         String message = "";
         
-        try {
-            PacienteDAO pacienteDAO = new PacienteDAO();
-            AdministradorDAO administradorDAO = new AdministradorDAO();
-            MedicoDAO medicoDAO = new MedicoDAO();
+        String action = (String) request.getParameter("action");
+
+        switch (action) {
+            case "loginpaciente":
+                try {
+                    PacienteDAO pacienteDAO = null;
+            try {
+                pacienteDAO = new PacienteDAO();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    String cpf = request.getParameter("cpf");
+                    String senha = request.getParameter("senha");
+                    
+                    Paciente paciente = pacienteDAO.login(cpf, senha);
+                    
+                    if (paciente.getCpf() != null && paciente.getAutorizado().equals("S")) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("paciente", paciente);
+                        RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
+                        login.forward(request, response);
+                    
+                    } else {
+                        message = "Paciente Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
+                        request.setAttribute("error", 1);  
+                        request.setAttribute("message", message);
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        loginFailed.forward(request, response);
+                    
+                    }               
+                } catch(IOException | NumberFormatException | ServletException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+                break;
             
-                String cpf = request.getParameter("cpf");
-                String senha = request.getParameter("senha");
-                
-                Paciente paciente = pacienteDAO.login(cpf, senha);
-                Administrador administrador = administradorDAO.login(cpf, senha);
-                Medico medico = medicoDAO.login(cpf, senha);
-                
-                if (paciente.getCpf() != null && paciente.getAutorizado().equals("S")) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("paciente", paciente);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
-                    login.forward(request, response);
+            case "loginmedico":
+                try {
+                    MedicoDAO medicoDAO = new MedicoDAO();
+                    String cpf = request.getParameter("cpf");
+                    String senha = request.getParameter("senha");
                     
-                } else if (administrador.getCpf() != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("administrador", administrador);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                    login.forward(request, response);
+                    Medico medico = medicoDAO.login(cpf, senha);
                     
-                } else if (medico.getCpf() != null && medico.getAutorizado().equals("S")) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("medico", medico);
-                    RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
-                    login.forward(request, response);
+                    if (medico.getCpf() != null && medico.getAutorizado().equals("S")) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("medico", medico);
+                        RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
+                        login.forward(request, response);
                     
-                } else {
-                    message = "Paciente/Médico/Administrador Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
-                    request.setAttribute("error", 1);  
-                    request.setAttribute("message", message);
-                    RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
-                    loginFailed.forward(request, response);
-                    
+                    } else {
+                        message = "Médico Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
+                        request.setAttribute("error", 1);  
+                        request.setAttribute("message", message);
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        loginFailed.forward(request, response);
+                    }
+                } catch(IOException | NumberFormatException | ServletException e) {
+                    System.out.println("Error: " + e.getMessage());
                 }
             
-        } catch(IOException | NumberFormatException | ServletException e) {
-            System.out.println("Error: " + e.getMessage());
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+                break;
+            
+            case "loginadmin": 
+                try {
+                    AdministradorDAO administradorDAO = new AdministradorDAO();
+                    String cpf = request.getParameter("cpf");
+                    String senha = request.getParameter("senha");
+                    
+                    Administrador administrador = administradorDAO.login(cpf, senha);
+                    
+                    if (administrador.getCpf() != null) {
+                        HttpSession session = request.getSession();
+                        session.setAttribute("administrador", administrador);
+                        RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        login.forward(request, response);
+                    
+                    } else {
+                        message = "Administrador Não Encontrado ou Não Autorizado ou Credenciais Inseridas Inválidas";
+                        request.setAttribute("error", 1);  
+                        request.setAttribute("message", message);
+                        RequestDispatcher loginFailed = getServletContext().getRequestDispatcher("/login.jsp");
+                        loginFailed.forward(request, response);
+                    
+                    }
+                } catch(IOException | NumberFormatException | ServletException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+                
+                break; 
+        }
     }
 }
