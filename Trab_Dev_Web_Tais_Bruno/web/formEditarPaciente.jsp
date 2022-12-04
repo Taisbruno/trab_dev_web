@@ -47,6 +47,7 @@
         <div class="form-group">
             <label for="autorizado"><b>Autorizado?</b></label>
         <select style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center;" class="form-select" id="autorizado" name="autorizado" required>
+        <option hidden value="<%= paciente.getAutorizado() %>"><%= paciente.getAutorizado() %></option>
         <option value="S"> Sim </option>     
         <option value="N"> Não </option>
         </select>

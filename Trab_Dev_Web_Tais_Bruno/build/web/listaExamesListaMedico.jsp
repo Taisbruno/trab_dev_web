@@ -46,7 +46,6 @@
                 ExameDAO exameDAO = new ExameDAO();
                 ArrayList<Exames> exames = exameDAO.getByConsulta(consulta.getId());
             %>
-            
             <div class="table-responsive">
                 <table class="table table-borderless table-hover table-sm">
                     <caption>Lista de Exames - Total: <%= exames.size() %></caption>

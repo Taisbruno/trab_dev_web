@@ -72,7 +72,7 @@
                         <%
                             for (int index = 0; index < consultas.size(); index++) {
                                 Consulta consulta = consultas.get(index); 
-                                String linkExames = "ConsultaController?action=getlistamedico&id=" + consulta.getId();
+                                String linkExames = "ConsultaController?action=getlistamedico_admin&id=" + consulta.getId();
 
                         %>
                             <tr>

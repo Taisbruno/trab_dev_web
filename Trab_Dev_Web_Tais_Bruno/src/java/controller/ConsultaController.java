@@ -82,6 +82,16 @@ public class ConsultaController extends HttpServlet {
                     getlistapaciente.forward(request, response);
 
                     break;
+                    
+                case "getlistamedico_admin":
+                    consultaId = Integer.parseInt(request.getParameter("id"));
+                    consulta = consultaDAO.get(consultaId);
+                
+                    request.setAttribute("consultasMedico", consulta);
+                    RequestDispatcher getlistamedico_admin = getServletContext().getRequestDispatcher("/listaExamesListaMedico_Admin.jsp");
+                    getlistamedico_admin.forward(request, response);
+                
+                    break;
         } 
     }
 

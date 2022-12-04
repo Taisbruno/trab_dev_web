@@ -57,7 +57,6 @@
             <label style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control"><%= tipoplanoDAO.get(paciente.getIdTipoPlano()).getDescricao() %></label>
         </div>
         <br>
-        
     </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </body>

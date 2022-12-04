@@ -46,8 +46,13 @@
                     for (int index = 0; index < medicos.size(); index++) {
                         Medico medico = medicos.get(index);
                 %>
-
+                <%
+                    if (medico.getAutorizado().equals("S")) {
+                %>    
                 <option value="<%= medico.getId() %>"><%= medico.getNome() + " - " + medico.getNomeEspecialidade(medico.getIdEspecialidade()) %></option>
+                <%
+                    }
+                %>
                 <%
                     }
                 %>
