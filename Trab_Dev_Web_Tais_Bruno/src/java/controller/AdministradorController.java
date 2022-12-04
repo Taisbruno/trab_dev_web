@@ -68,6 +68,7 @@ public class AdministradorController extends HttpServlet {
         
             AdministradorDAO administradorDAO = new AdministradorDAO();
             request.setCharacterEncoding("UTF-8");
+            String message = "";
             
             String action = (String) request.getParameter("action");
             
@@ -78,6 +79,8 @@ public class AdministradorController extends HttpServlet {
                     String cpf = request.getParameter("cpf");
                     String senha = request.getParameter("senha");
                     Administrador administrador = new Administrador(nome, cpf, senha);
+                    
+                    request.setAttribute("message", message);
 
                     try {
                         administradorDAO.insert(administrador);
@@ -93,26 +96,27 @@ public class AdministradorController extends HttpServlet {
                         list.forward(request, response);
 
                     } else {
-                        request.setAttribute("msgError", "Erro");
+                        request.setAttribute("error", 1);
+                        request.setAttribute("message", message);
                         RequestDispatcher rd = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
                         rd.forward(request, response);
-                    }
+                        }
                     }
                     break;
                     
                 case "update":
-                    Administrador administradorr = new Administrador();
+                        Administrador administradorr = new Administrador();
                     
-                    administradorr.setId(Integer.parseInt(request.getParameter("id")));
-                    administradorr.setNome(request.getParameter("nome"));
-                    administradorr.setCpf(request.getParameter("cpf"));
-                    administradorr.setSenha(request.getParameter("senha"));
-                    administradorDAO.update(administradorr);
+                        administradorr.setId(Integer.parseInt(request.getParameter("id")));
+                        administradorr.setNome(request.getParameter("nome"));
+                        administradorr.setCpf(request.getParameter("cpf"));
+                        administradorr.setSenha(request.getParameter("senha"));
+                        administradorDAO.update(administradorr);
             
-                    request.setAttribute("administrador", administradorr);
-                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
-                    list.forward(request, response);
-                    
+                        request.setAttribute("administrador", administradorr);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
+                        list.forward(request, response);
+
                     break;
             }
     }

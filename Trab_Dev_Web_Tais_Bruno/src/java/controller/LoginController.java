@@ -75,17 +75,6 @@ public class LoginController extends HttpServlet {
             AdministradorDAO administradorDAO = new AdministradorDAO();
             MedicoDAO medicoDAO = new MedicoDAO();
             
-            if (request.getParameter("cpf").equals("")) {
-                message = "'CPF' is empty or is invalid";
-                request.setAttribute("error", 1);
-            }
-            if (request.getParameter("senha").equals("")) {
-                message = "'Senha' is empty";
-                request.setAttribute("error", 1);
-            }
-            
-            if (message.equals("")) {
-
                 String cpf = request.getParameter("cpf");
                 String senha = request.getParameter("senha");
                 
@@ -119,7 +108,6 @@ public class LoginController extends HttpServlet {
                     loginFailed.forward(request, response);
                     
                 }
-            }
             
         } catch(IOException | NumberFormatException | ServletException e) {
             System.out.println("Error: " + e.getMessage());

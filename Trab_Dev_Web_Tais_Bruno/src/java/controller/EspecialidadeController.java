@@ -88,46 +88,49 @@ public class EspecialidadeController extends HttpServlet {
         
             EspecialidadeDAO especialidadeDAO = new EspecialidadeDAO();
             request.setCharacterEncoding("UTF-8");
+            String message = "";
             
             String action = (String) request.getParameter("action");
             
             switch (action) {
                 
                 case "insert":
-                    String descricao = request.getParameter("descricao");
-                    Especialidade especialidade = new Especialidade(descricao);
+                        String descricao = request.getParameter("descricao");
+                        Especialidade especialidade = new Especialidade(descricao);
                     
-                    try {
-                        especialidadeDAO.insert(especialidade);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Falha no cadastro da Especialidade");
-                    } finally {
-                        ArrayList<Especialidade> especialidades;
-                        especialidades = especialidadeDAO.getAll();
+                        try {
+                            especialidadeDAO.insert(especialidade);
+                        } catch (Exception e) {
+                            throw new RuntimeException("Falha no cadastro da Especialidade");
+                        } finally {
+                            ArrayList<Especialidade> especialidades;
+                            especialidades = especialidadeDAO.getAll();
 
-                    if (especialidade != null) {
-                        request.setAttribute("especialidades", especialidades);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                        list.forward(request, response);
+                        if (especialidade != null) {
+                            request.setAttribute("especialidades", especialidades);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                            list.forward(request, response);
 
-                    } else {
-                        request.setAttribute("msgError", "Erro");
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
-                        rd.forward(request, response);
-                    }
-                    } 
-                        break;
+                        } else {
+                            request.setAttribute("error", 1);
+                            request.setAttribute("message", message);
+                            RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
+                            rd.forward(request, response);
+                        }
+                        }
+
+                    break;
                         
                 case "update":
-                    Especialidade especialidadee = new Especialidade();
-           
-                    especialidadee.setId(Integer.parseInt(request.getParameter("id")));
-                    especialidadee.setDescricao(request.getParameter("descricao"));
-                    especialidadeDAO.update(especialidadee);
-            
-                    request.setAttribute("especialidade", especialidadee);
-                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
-                    list.forward(request, response);
+                        Especialidade especialidadee = new Especialidade();
+
+                        especialidadee.setId(Integer.parseInt(request.getParameter("id")));
+                        especialidadee.setDescricao(request.getParameter("descricao"));
+                        especialidadeDAO.update(especialidadee);
+
+                        request.setAttribute("especialidade", especialidadee);
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
+                        list.forward(request, response);
                     
                     break;
             }
