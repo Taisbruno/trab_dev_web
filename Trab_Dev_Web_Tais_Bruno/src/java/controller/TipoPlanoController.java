@@ -96,49 +96,100 @@ public class TipoPlanoController extends HttpServlet {
         
             TipoPlanoDAO tipoplanoDAO = new TipoPlanoDAO();
             request.setCharacterEncoding("UTF-8");
+            String message = "";
         
             String action = (String) request.getParameter("action");
             
             switch (action) {
                 
                 case "insert":
-                    String descricao = request.getParameter("descricao");
-                    TipoPlano tipoplano = new TipoPlano(descricao);
-        
                     try {
-                        tipoplanoDAO.insert(tipoplano);
-                    } catch (Exception e) {
-                        throw new RuntimeException("Falha no cadastro do Tipo do Plano");
-                    } finally {
-                        ArrayList<TipoPlano> tipoplanos;
-                        tipoplanos = tipoplanoDAO.getAll();
-            
-                    if (tipoplano != null) {
-                        request.setAttribute("tipoplanos", tipoplanos);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                        list.forward(request, response);
-
-                    } else {
-                        request.setAttribute("msgError", "Erro");
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formTipoPlano.jsp");
-                        rd.forward(request, response);
+                        TipoPlano tipoplano = new TipoPlano();
+                    if (request.getParameter("descricao").equals("")) {
+                        message = "'Descrição' is empty";
+                        request.setAttribute("error", 1);
                     }
-                    }  
-                    break;
+                    if (message.equals("")) {
+                        tipoplano.setDescricao(request.getParameter("descricao"));
+
+                        if (tipoplanoDAO.insert(tipoplano)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formTipoPlano.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+                            
+                        } catch (Exception e) {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formTipoPlano.jsp");
+                            error.forward(request, response);
+                        } finally {
+                            ArrayList<TipoPlano> tipoplanos;
+                            tipoplanos = tipoplanoDAO.getAll();
+
+                            request.setAttribute("tipoplanos", tipoplanos);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraTipoPlano.jsp");
+                            list.forward(request, response);
+                        } 
+                    
+                        break;
                     
                 case "update": 
-                    TipoPlano tipoplanoo = new TipoPlano();
-           
-                    tipoplanoo.setId(Integer.parseInt(request.getParameter("id")));
-                    tipoplanoo.setDescricao(request.getParameter("descricao"));
-                    tipoplanoDAO.update(tipoplanoo);
+                    try {
+                        TipoPlano tipoplano = new TipoPlano();
+                        if (request.getParameter("descricao").equals("")) {
+                            message = "'Descrição' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                    
+                        if (message.equals("")) {
+                            tipoplano.setId(Integer.parseInt(request.getParameter("id")));
+                            tipoplano.setDescricao(request.getParameter("descricao"));
+                            
+                            if (tipoplanoDAO.update(tipoplano)) {
+                                request.setAttribute("error", 0);
+                            } else {
+                                message = "Não Efetivado";
+                                request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
 
-                    request.setAttribute("tipoplano", tipoplanoo);
-                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraTipoPlano.jsp");
-                    list.forward(request, response);
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarTipoPlano.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+                        
+                        } catch (Exception e) {
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                        } finally {
+                            ArrayList<TipoPlano> tipoplanos;
+                            tipoplanos = tipoplanoDAO.getAll();
+                            request.setAttribute("tipoplanos", tipoplanos);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraTipoPlano.jsp");
+                            list.forward(request, response);
+                        }
+                        break;
+            }
         }
-             
-    }
 }
 
 

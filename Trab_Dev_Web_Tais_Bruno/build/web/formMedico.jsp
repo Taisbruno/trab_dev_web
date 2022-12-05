@@ -34,7 +34,7 @@
         <br>
         <div class="form-group">
             <label for="nome"><b> Nome </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="nome" id="nome" autocomplete="off" placeholder="Digite o nome" required>
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="nome" id="nome" autocomplete="off" placeholder="Digite o nome">
         </div>
         <br>
         <div class="form-group">
@@ -110,6 +110,17 @@
         <br>
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Salvar </button>
     </form>
+    </div>
+    <div class="container">
+        <%                       
+                if (request.getAttribute("message") != null) {
+        %>
+                    <div class="alert alert-danger m-5" role="alert">
+                        <%= (String) request.getAttribute("message") %>
+                    </div>
+        <%
+                }
+        %>
     </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </body>

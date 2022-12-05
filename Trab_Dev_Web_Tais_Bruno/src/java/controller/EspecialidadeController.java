@@ -95,44 +95,91 @@ public class EspecialidadeController extends HttpServlet {
             switch (action) {
                 
                 case "insert":
-                        String descricao = request.getParameter("descricao");
-                        Especialidade especialidade = new Especialidade(descricao);
-                    
-                        try {
-                            especialidadeDAO.insert(especialidade);
-                        } catch (Exception e) {
-                            throw new RuntimeException("Falha no cadastro da Especialidade");
-                        } finally {
-                            ArrayList<Especialidade> especialidades;
-                            especialidades = especialidadeDAO.getAll();
-
-                        if (especialidade != null) {
-                            request.setAttribute("especialidades", especialidades);
-                            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                            list.forward(request, response);
-
-                        } else {
+                    try {
+                        Especialidade especialidade = new Especialidade();
+                        if (request.getParameter("descricao").equals("")) {
+                            message = "'Descrição' is empty";
                             request.setAttribute("error", 1);
-                            request.setAttribute("message", message);
-                            RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
-                            rd.forward(request, response);
                         }
-                        }
+                        if (message.equals("")) {
+                            especialidade.setDescricao(request.getParameter("descricao"));
+                            
+                            if (especialidadeDAO.insert(especialidade)) {
+                                request.setAttribute("error", 0);
+                            } else {
+                                message = "Não Efetivado";
+                                request.setAttribute("error", 1);
+                            }
+                            } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
 
-                    break;
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
+                            error.forward(request, response);
+                            }
+                            request.setAttribute("message", message);
+                        
+                            } catch (Exception e) {
+                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                                System.out.println(message);
+
+                                request.setAttribute("message", message);
+                                request.setAttribute("error", 1);
+                                RequestDispatcher error = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
+                                error.forward(request, response);
+                  
+                                } finally {
+                                    ArrayList<Especialidade> especialidades;
+                                    especialidades = especialidadeDAO.getAll();
+                                    request.setAttribute("especialidades", especialidades);
+                                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
+                                    list.forward(request, response);
+
+                                } 
+                                break;
                         
                 case "update":
-                        Especialidade especialidadee = new Especialidade();
-
-                        especialidadee.setId(Integer.parseInt(request.getParameter("id")));
-                        especialidadee.setDescricao(request.getParameter("descricao"));
-                        especialidadeDAO.update(especialidadee);
-
-                        request.setAttribute("especialidade", especialidadee);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
-                        list.forward(request, response);
+                    try {
+                        Especialidade especialidade = new Especialidade();
+                        if (request.getParameter("descricao").equals("")) {
+                            message = "'Descrição' is empty";
+                            request.setAttribute("error", 1);
+                        }
                     
-                    break;
+                        if (message.equals("")) {
+                            especialidade.setId(Integer.parseInt(request.getParameter("id")));
+                            especialidade.setDescricao(request.getParameter("descricao"));
+                        
+                            if (especialidadeDAO.update(especialidade)) {
+                                request.setAttribute("error", 0);
+                            } else {
+                                message = "Não Efetivado";
+                                request.setAttribute("error", 1);
+                            }
+                            } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarEspecialidade.jsp");
+                            error.forward(request, response);
+                            }
+                            request.setAttribute("message", message);
+                            
+                            } catch (Exception e) {
+                                request.setAttribute("message", message);
+                                request.setAttribute("error", 1);
+                            } finally {
+                                ArrayList<Especialidade> especialidades;
+                                especialidades = especialidadeDAO.getAll();
+                                request.setAttribute("especialidades", especialidades);
+                                RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraEspecialidades.jsp");
+                                list.forward(request, response);
+                            }
+                            break;
             }
     }
 }

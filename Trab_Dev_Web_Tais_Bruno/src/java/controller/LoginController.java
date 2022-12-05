@@ -90,17 +90,17 @@ public class LoginController extends HttpServlet {
             case "loginpaciente":
                 try {
                     PacienteDAO pacienteDAO = null;
-            try {
-                pacienteDAO = new PacienteDAO();
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    pacienteDAO = new PacienteDAO();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                     String cpf = request.getParameter("cpf");
                     String senha = request.getParameter("senha");
                     
                     Paciente paciente = pacienteDAO.login(cpf, senha);
                     
-                    if (paciente.getCpf() != null && paciente.getAutorizado().equals("S")) {
+                    if (paciente.getCpf() != null && paciente.getSenha() != null && paciente.getAutorizado().equals("S")) {
                         HttpSession session = request.getSession();
                         session.setAttribute("paciente", paciente);
                         RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
@@ -127,7 +127,7 @@ public class LoginController extends HttpServlet {
                     
                     Medico medico = medicoDAO.login(cpf, senha);
                     
-                    if (medico.getCpf() != null && medico.getAutorizado().equals("S")) {
+                    if (medico.getCpf() != null && medico.getSenha() != null && medico.getAutorizado().equals("S")) {
                         HttpSession session = request.getSession();
                         session.setAttribute("medico", medico);
                         RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
@@ -154,7 +154,7 @@ public class LoginController extends HttpServlet {
                     
                     Administrador administrador = administradorDAO.login(cpf, senha);
                     
-                    if (administrador.getCpf() != null) {
+                    if (administrador.getCpf() != null && administrador.getSenha() != null) {
                         HttpSession session = request.getSession();
                         session.setAttribute("administrador", administrador);
                         RequestDispatcher login = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");

@@ -17,7 +17,6 @@ import models.Exames;
 import models.Medico;
 import utils.Date;
 
-
 @WebServlet(name = "ConsultaController", urlPatterns = {"/ConsultaController"})
 public class ConsultaController extends HttpServlet {
 
@@ -109,38 +108,94 @@ public class ConsultaController extends HttpServlet {
             switch (action) {
                 
                 case "marcar":
-                        String data = request.getParameter("data");
-                        String hora = request.getParameter("hora");
-                        String descricao = request.getParameter("descricao");
-                        String realizada = request.getParameter("realizada");
-                        String idmedico = request.getParameter("idmedico");
-                        String idpaciente = request.getParameter("idpaciente");
-                        String dataCompleta = data + " " + hora;
+                    try {
+                        Consulta consulta = new Consulta();
+                        if (request.getParameter("data").equals("")) {
+                            message = "'Data' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("hora").equals("")) {
+                            message = "'Hora' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("descricao").equals("")) {
+                            message = "'Descricao' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("realizada").equals("")) {
+                            message = "'Realizada' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idmedico").equals("")) {
+                            message = "'IdMedico' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idpaciente").equals("")) {
+                            message = "'IdPaciente' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                    
+                        if (message.equals("")) {
+                            String data = request.getParameter("data");
+                            String hora = request.getParameter("hora");
+                            String dataCompleta = data + " " + hora;
+                            String dataformated = Date.format(dataCompleta, "brazilonlyDate");
+                        
+                            consulta.setData(dataCompleta);
+                            consulta.setDescricao(request.getParameter("descricao"));
+                            consulta.setRealizada(request.getParameter("realizada"));
+                            consulta.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
+                            consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
+                        
+                            ArrayList<Consulta> consultas = consultaDAO.getAll();
             
-                        String dataformated = Date.format(dataCompleta, "brazilonlyDate");
-            
-                        Consulta consulta = new Consulta(dataCompleta, descricao, realizada, Integer.parseInt(idmedico), Integer.parseInt(idpaciente));
-                        ArrayList<Consulta> consultas = consultaDAO.getAll();
-            
-                        for (Consulta consultaa: consultas) {
-                            if (dataformated.equals(consultaa.getData().split(" ")[0]) && (Integer.parseInt(idmedico) == consultaa.getIdMedico())) {
-                                message = "Não é possível marcar consulta com o médico desejado na data informada. Escolha uma outra data que esteja disponível para marcação";
-                                request.setAttribute("error", 1);  
-                                request.setAttribute("message", message);
-                                RequestDispatcher nope = request.getRequestDispatcher("/formConsulta.jsp");
-                                nope.forward(request, response);
-                                
-                            break;
+                            for (Consulta consultaa: consultas) {
+                                if (dataformated.equals(consultaa.getData().split(" ")[0]) && (Integer.parseInt(request.getParameter("idmedico")) == consultaa.getIdMedico())) {
+                                    message = "Não é possível marcar consulta com o médico desejado na data informada. Escolha uma outra data que esteja disponível para marcação";
+                                    request.setAttribute("error", 1);  
+                                    request.setAttribute("message", message);
+                                    RequestDispatcher nope = request.getRequestDispatcher("/formConsulta.jsp");
+                                    nope.forward(request, response);
+
+                                break;
+                            } 
+                            }
+                        if (message.equals("")) {
+                            consultaDAO.insert(consulta);
+                            request.setAttribute("error", 0);
+                            HttpSession session = request.getSession();
+                            session.setAttribute("consulta", consulta);
+                            RequestDispatcher done = request.getRequestDispatcher("/AreaPaciente.jsp");
+                            done.forward(request, response);
                         } 
-                    }   
-                    if (message.equals("")) {
-                        consultaDAO.insert(consulta);
-                        HttpSession session = request.getSession();
-                        session.setAttribute("consulta", consulta);
-                        RequestDispatcher done = request.getRequestDispatcher("/AreaPaciente.jsp");
-                        done.forward(request, response);
-                    }
-                    break;
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formConsulta.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+                        
+                        } catch (Exception e) {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formConsulta.jsp");
+                            error.forward(request, response);
+                        } finally {
+                            ArrayList<Consulta> consultas;
+                            consultas = consultaDAO.getAll();
+                            
+                            request.setAttribute("consultas", consultas);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
+                            list.forward(request, response);
+                        }
+                        break;
                     
                 case "update":
                         Consulta consultaa = new Consulta();
@@ -192,7 +247,6 @@ public class ConsultaController extends HttpServlet {
                             System.out.println(message);
 
                         request.setAttribute("message", message);
-                        request.setAttribute("error", 1);
 
                         } finally {
 

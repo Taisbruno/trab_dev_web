@@ -35,10 +35,10 @@
             <br>
             <br>
             <label for="nome"><b>Nome do Paciente</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= paciente.getNome() %>" required>
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" id="nome" name="nome" value="<%= paciente.getNome() %>">
              <br>
              <label for="cpf"><b>CPF</b></label>
-            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= paciente.getCpf() %>" required>
+            <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="cpf" id="cpf" value="<%= paciente.getCpf() %>">
              <br>
              <label for="senha"><b>Senha</b></label>
             <input type="text" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="senha" id="senha" value="<%= paciente.getSenha() %>" required>
@@ -68,6 +68,17 @@
         <br>
         <button type="submit" class="btn btn-dark" style="margin-top: 40px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
      </form>
+    </div>
+    <div class="container">
+        <%                       
+                if (request.getAttribute("message") != null) {
+        %>
+                    <div class="alert alert-danger m-5" role="alert">
+                        <%= (String) request.getAttribute("message") %>
+                    </div>
+        <%
+                }
+        %>
     </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </body>

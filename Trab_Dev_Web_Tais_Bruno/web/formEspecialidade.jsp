@@ -31,6 +31,17 @@
         <button type="submit" class="btn btn-dark" style="margin-top: 20px; margin-bottom: 30px"><i class="fas fa-save"></i> Enviar </button>
     </form>
     </div>
+    <div class="container">
+        <%                       
+                if (request.getAttribute("message") != null) {
+        %>
+                    <div class="alert alert-danger m-5" role="alert">
+                        <%= (String) request.getAttribute("message") %>
+                    </div>
+        <%
+                }
+        %>
+    </div>
     <script src="bootstrap/bootstrap.bundle.min.js"></script>
 </body>
 </html>

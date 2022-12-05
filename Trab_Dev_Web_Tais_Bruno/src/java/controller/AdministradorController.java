@@ -75,48 +75,110 @@ public class AdministradorController extends HttpServlet {
             switch (action) {
                 
                 case "insert":
-                    String nome = request.getParameter("nome");
-                    String cpf = request.getParameter("cpf");
-                    String senha = request.getParameter("senha");
-                    Administrador administrador = new Administrador(nome, cpf, senha);
-                    
-                    request.setAttribute("message", message);
-
                     try {
-                        administradorDAO.insert(administrador);
+                        Administrador administrador = new Administrador();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+
+                        if (message.equals("")) {
+                            administrador.setNome(request.getParameter("nome"));
+                            administrador.setCpf(request.getParameter("cpf"));
+                            administrador.setSenha(request.getParameter("senha"));
+
+                            if(administradorDAO.insert(administrador)) {
+                                request.setAttribute("error", 0);
+                            } else {
+                                message = "Não Efetivado";
+                                request.setAttribute("error", 1);
+                            }
+                            } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
+                            error.forward(request, response);
+                            }
+                            request.setAttribute("message", message);
+                            
+                            } catch (Exception e) {
+                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                                System.out.println(message);
+
+                                request.setAttribute("message", message);
+                                request.setAttribute("error", 1);
+                                RequestDispatcher error = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
+                                error.forward(request, response);
+                            } finally {
+                                ArrayList<Administrador> administradores;
+                                administradores = administradorDAO.getAll();
+
+                                request.setAttribute("administradores", administradores);
+                                RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
+                                list.forward(request, response);
+                            }
+                            break;
+                    
+                case "update":
+                    try {
+                        Administrador administrador = new Administrador();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+
+                        if (message.equals("")) {
+                            administrador.setId(Integer.parseInt(request.getParameter("id")));
+                            administrador.setNome(request.getParameter("nome"));
+                            administrador.setCpf(request.getParameter("cpf"));
+                            administrador.setSenha(request.getParameter("senha"));
+                            
+                        if (administradorDAO.update(administrador)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarAdministrador.jsp");
+                            error.forward(request, response);
+                        } 
+                        request.setAttribute("message", message);
+                        
                     } catch (Exception e) {
-                        throw new RuntimeException("Falha no cadastro do administrador");
+                        request.setAttribute("message", message);
+                        request.setAttribute("error", 1); 
                     } finally {
                         ArrayList<Administrador> administradores;
                         administradores = administradorDAO.getAll();
-
-                    if (administrador != null) {
                         request.setAttribute("administradores", administradores);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
-                        list.forward(request, response);
-
-                    } else {
-                        request.setAttribute("error", 1);
-                        request.setAttribute("message", message);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formAdministrador.jsp");
-                        rd.forward(request, response);
-                        }
-                    }
-                    break;
-                    
-                case "update":
-                        Administrador administradorr = new Administrador();
-                    
-                        administradorr.setId(Integer.parseInt(request.getParameter("id")));
-                        administradorr.setNome(request.getParameter("nome"));
-                        administradorr.setCpf(request.getParameter("cpf"));
-                        administradorr.setSenha(request.getParameter("senha"));
-                        administradorDAO.update(administradorr);
-            
-                        request.setAttribute("administrador", administradorr);
                         RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraAdministradores.jsp");
                         list.forward(request, response);
-
+                    }
                     break;
             }
     }

@@ -92,61 +92,157 @@ public class MedicoController extends HttpServlet {
         
             MedicoDAO medicoDAO = new MedicoDAO();
             request.setCharacterEncoding("UTF-8");
+            String message = "";
             
             String action = (String) request.getParameter("action");
             
             switch (action) {
                 
                 case "insert":
-                    
-                    String nome = request.getParameter("nome");
-                    int crm = Integer.parseInt(request.getParameter("crm"));
-                    String estadocrm = request.getParameter("estadocrm");
-                    String cpf = request.getParameter("cpf");
-                    String senha = request.getParameter("senha");
-                    String autorizado = request.getParameter("autorizado");
-                    int idespecialidade = Integer.parseInt(request.getParameter("idespecialidade"));
-                    Medico medico = new Medico(nome, crm, estadocrm, cpf, senha, autorizado, idespecialidade);
-
                     try {
-                        medicoDAO.insert(medico);
+                        Medico medico = new Medico();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("crm").equals("")) {
+                            message = "'Crm' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("estadocrm").equals("")) {
+                            message = "'EstadoCrm' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("autorizado").equals("")) {
+                            message = "'Autorizado' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idespecialidade").equals("")) {
+                            message = "'IdEspecialidade' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                    
+                    if (message.equals("")) {
+                        medico.setNome(request.getParameter("nome"));
+                        medico.setCrm(Integer.parseInt(request.getParameter("crm")));
+                        medico.setEstadoCrm(request.getParameter("estadocrm"));
+                        medico.setCpf(request.getParameter("cpf"));
+                        medico.setSenha(request.getParameter("senha"));
+                        medico.setAutorizado(request.getParameter("autorizado"));
+                        medico.setIdEspecialidade(Integer.parseInt(request.getParameter("idespecialidade")));
+
+                        if (medicoDAO.insert(medico)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formMedico.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+            
                     } catch (Exception e) {
-                        throw new RuntimeException("Falha no cadastro do médico");
+                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                        System.out.println(message);
+
+                        request.setAttribute("message", message);
+                        request.setAttribute("error", 1);
+                        RequestDispatcher error = getServletContext().getRequestDispatcher("/formMedico.jsp");
+                        error.forward(request, response);
+                    } finally {
+                            ArrayList<Medico> medicos;
+                            medicos = medicoDAO.getAll();
+                            
+                            request.setAttribute("medicos", medicos);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraMedicos.jsp");
+                            list.forward(request, response);
+                        }
+                        break;
+                    
+                case "update":
+                    try {
+                        Medico medico = new Medico();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("crm").equals("")) {
+                            message = "'Crm' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("estadocrm").equals("")) {
+                            message = "'EstadoCrm' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("autorizado").equals("")) {
+                            message = "'Autorizado' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idespecialidade").equals("")) {
+                            message = "'IdEspecialidade' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                    
+                    if (message.equals("")) {
+                        medico.setId(Integer.parseInt(request.getParameter("id")));
+                        medico.setNome(request.getParameter("nome"));
+                        medico.setCrm(Integer.parseInt(request.getParameter("crm")));
+                        medico.setEstadoCrm(request.getParameter("estadocrm"));
+                        medico.setCpf(request.getParameter("cpf"));
+                        medico.setSenha(request.getParameter("senha"));
+                        medico.setAutorizado(request.getParameter("autorizado"));
+                        medico.setIdEspecialidade(Integer.parseInt(request.getParameter("idespecialidade")));
+                        
+                     if (medicoDAO.update(medico)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarMedico.jsp");
+                            error.forward(request, response);
+                        } 
+                        request.setAttribute("message", message);
+                        
+                    } catch (Exception e) {
+                        request.setAttribute("message", message);
+                        request.setAttribute("error", 1); 
                     } finally {
                         ArrayList<Medico> medicos;
                         medicos = medicoDAO.getAll();
-
-                    if (medico != null) {
                         request.setAttribute("medicos", medicos);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaAdministrador.jsp");
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraMedicos.jsp");
                         list.forward(request, response);
-
-                    } else {
-                        request.setAttribute("msgError", "Erro");
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formMedico.jsp");
-                        rd.forward(request, response);
                     }
-                    } 
-                    break;
-                    
-                case "update":
-                    
-                    Medico medicoo = new Medico();
-                    
-                    medicoo.setId(Integer.parseInt(request.getParameter("id")));
-                    medicoo.setNome(request.getParameter("nome"));
-                    medicoo.setCrm(Integer.parseInt(request.getParameter("crm")));
-                    medicoo.setEstadoCrm(request.getParameter("estadocrm"));
-                    medicoo.setCpf(request.getParameter("cpf"));
-                    medicoo.setSenha(request.getParameter("senha"));
-                    medicoo.setAutorizado(request.getParameter("autorizado"));
-                    medicoo.setIdEspecialidade(Integer.parseInt(request.getParameter("idespecialidade")));
-                    medicoDAO.update(medicoo);
-
-                    request.setAttribute("medico", medicoo);
-                    RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraMedicos.jsp");
-                    list.forward(request, response);
-                    
                     break;
             }
     }

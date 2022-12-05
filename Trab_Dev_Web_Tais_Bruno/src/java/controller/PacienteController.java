@@ -102,168 +102,197 @@ public class PacienteController extends HttpServlet {
         
             switch (action) {
                 case "insert":
-                    
-                    if (request.getParameter("nome") == null) {
-                        message = "'Nome' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("cpf") == null) {
-                        message = "'Cpf' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("senha") == null) {
-                        message = "'Senha' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("autorizado").equals("")) {
-                        message = "'Autorizado' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("idtipoplano").equals("")) {
-                        message = "'TipoPlano' is empty";
-                        request.setAttribute("error", 1);
-                    }
-
-                    if (message.equals("")) {
-                        String nome = request.getParameter("nome");
-                        String cpf = request.getParameter("cpf");
-                        String senha = request.getParameter("senha");
-                        String autorizado = request.getParameter("autorizado");
-                        String idtipoplano = request.getParameter("idtipoplano");
-                        Paciente paciente = new Paciente(nome, cpf, senha, autorizado, Integer.parseInt(idtipoplano));
-                    
                     try {
-                        pacienteDAO.insert(paciente);
+                        Paciente paciente = new Paciente();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("autorizado").equals("")) {
+                            message = "'Autorizado' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idtipoplano").equals("")) {
+                            message = "'TipoPlano' is empty";
+                            request.setAttribute("error", 1);
+                        }
+
+                        if (message.equals("")) {
+                            paciente.setNome(request.getParameter("nome"));
+                            paciente.setCpf(request.getParameter("cpf"));
+                            paciente.setSenha(request.getParameter("senha"));
+                            paciente.setAutorizado(request.getParameter("autorizado"));
+                            paciente.setIdTipoPlano(Integer.parseInt(request.getParameter("idtipoplano")));
+                        
+                        if (pacienteDAO.insert(paciente)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formPaciente.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+            
                     } catch (Exception e) {
-                        message = "Error: " + e.getMessage();
+                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                        System.out.println(message);
+
                         request.setAttribute("message", message);
                         request.setAttribute("error", 1);
+                        RequestDispatcher error = getServletContext().getRequestDispatcher("/formPaciente.jsp");
+                        error.forward(request, response);
                     } finally {
                         ArrayList<Paciente> pacientes;
                         pacientes = pacienteDAO.getAll();
-            
-                    if (paciente != null) {
+                            
                         request.setAttribute("pacientes", pacientes);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraPacientes.jsp");
                         list.forward(request, response);
-
-                    } else {
-                        request.setAttribute("message", message);
-                        request.setAttribute("error", 1);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formPaciente.jsp");
-                        rd.forward(request, response);
-                    }
-                    }
-                    }
-                    request.setAttribute("message", message);
-                    
+                        }
                     break;
                     
                 case "insert_admin":
-                    
-                    if (request.getParameter("nome") == null) {
-                        message = "'Nome' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("cpf") == null) {
-                        message = "'Cpf' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("senha") == null) {
-                        message = "'Senha' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("autorizado").equals("")) {
-                        message = "'Autorizado' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("idtipoplano").equals("")) {
-                        message = "'TipoPlano' is empty";
-                        request.setAttribute("error", 1);
-                    }
-
-                    if (message.equals("")) {
-                        String nomee = request.getParameter("nome");
-                        String cpff = request.getParameter("cpf");
-                        String senhaa = request.getParameter("senha");
-                        String autorizadoo = request.getParameter("autorizado");
-                        String idtipoplanoo = request.getParameter("idtipoplano");
-                        Paciente pacienteee = new Paciente(nomee, cpff, senhaa, autorizadoo, Integer.parseInt(idtipoplanoo));
-                    
                     try {
-                        pacienteDAO.insert(pacienteee);
+                        Paciente paciente = new Paciente();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("autorizado").equals("")) {
+                            message = "'Autorizado' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idtipoplano").equals("")) {
+                            message = "'TipoPlano' is empty";
+                            request.setAttribute("error", 1);
+                        }
+
+                        if (message.equals("")) {
+                            paciente.setNome(request.getParameter("nome"));
+                            paciente.setCpf(request.getParameter("cpf"));
+                            paciente.setSenha(request.getParameter("senha"));
+                            paciente.setAutorizado(request.getParameter("autorizado"));
+                            paciente.setIdTipoPlano(Integer.parseInt(request.getParameter("idtipoplano")));
+                        
+                        if (pacienteDAO.insert(paciente)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
+
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formInsertPaciente_Admin.jsp");
+                            error.forward(request, response);
+                        }
+                        request.setAttribute("message", message);
+            
                     } catch (Exception e) {
-                        message = "Error: " + e.getMessage();
+                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                        System.out.println(message);
+
                         request.setAttribute("message", message);
                         request.setAttribute("error", 1);
+                        RequestDispatcher error = getServletContext().getRequestDispatcher("/formInsertPaciente_Admin.jsp");
+                        error.forward(request, response);
                     } finally {
                         ArrayList<Paciente> pacientes;
                         pacientes = pacienteDAO.getAll();
-            
-                    if (pacienteee != null) {
+                            
                         request.setAttribute("pacientes", pacientes);
                         RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraPacientes.jsp");
                         list.forward(request, response);
-
-                    } else {
-                        request.setAttribute("message", message);
-                        request.setAttribute("error", 1);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formInsertPaciente_Admin.jsp");
-                        rd.forward(request, response);
                     }
-                    }
-                    }
-                    request.setAttribute("message", message);
-                    
                     break;
                     
                 case "update":
-                    
-                    if (request.getParameter("nome") == null) {
-                        message = "'Nome' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("cpf") == null) {
-                        message = "'Cpf' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("senha") == null) {
-                        message = "'Senha' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("autorizado").equals("")) {
-                        message = "'Autorizado' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    if (request.getParameter("idtipoplano").equals("")) {
-                        message = "'TipoPlano' is empty";
-                        request.setAttribute("error", 1);
-                    }
-                    
-                    if (message.equals("")) {
-                        Paciente pacientee = new Paciente();
+                    try {
+                        Paciente paciente = new Paciente();
+                        if (request.getParameter("nome").equals("")) {
+                            message = "'Nome' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("senha").equals("")) {
+                            message = "'Senha' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("autorizado").equals("")) {
+                            message = "'Autorizado' is empty";
+                            request.setAttribute("error", 1);
+                        }
+                        if (request.getParameter("idtipoplano").equals("")) {
+                            message = "'TipoPlano' is empty";
+                            request.setAttribute("error", 1);
+                        }
 
-                        pacientee.setId(Integer.parseInt(request.getParameter("id")));
-                        pacientee.setNome(request.getParameter("nome"));
-                        pacientee.setCpf(request.getParameter("cpf"));
-                        pacientee.setSenha(request.getParameter("senha"));
-                        pacientee.setAutorizado(request.getParameter("autorizado"));
-                        pacientee.setIdTipoPlano(Integer.parseInt(request.getParameter("idtipoplano")));
-                        pacienteDAO.update(pacientee);
+                        if (message.equals("")) {
+                            paciente.setId(Integer.parseInt(request.getParameter("id")));
+                            paciente.setNome(request.getParameter("nome"));
+                            paciente.setCpf(request.getParameter("cpf"));
+                            paciente.setSenha(request.getParameter("senha"));
+                            paciente.setAutorizado(request.getParameter("autorizado"));
+                            paciente.setIdTipoPlano(Integer.parseInt(request.getParameter("idtipoplano")));
+                            
+                            if (pacienteDAO.update(paciente)) {
+                                request.setAttribute("error", 0);
+                            } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
 
-                        request.setAttribute("paciente", pacientee);
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarPaciente.jsp");
+                            error.forward(request, response);
+                        } 
+                        request.setAttribute("message", message);
+                        
+                    } catch (Exception e) {
+                        request.setAttribute("message", message);
+                        request.setAttribute("error", 1); 
+                    } finally {
+                        ArrayList<Paciente> pacientes;
+                        pacientes = pacienteDAO.getAll();
+                        request.setAttribute("pacientes", pacientes);
                         RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraPacientes.jsp");
                         list.forward(request, response);
-                    } else {
-                        request.setAttribute("message", message);
-                        request.setAttribute("error", 1);
-                        RequestDispatcher rd = getServletContext().getRequestDispatcher("/formEditarPaciente.jsp");
-                        rd.forward(request, response);
                     }
-                    request.setAttribute("message", message);
-                    
                     break;
-        }
-       
+            } 
     }
 }
