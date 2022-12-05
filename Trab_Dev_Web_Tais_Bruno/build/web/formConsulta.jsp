@@ -35,7 +35,6 @@
         <br>
      <form method="POST" action="ConsultaController?action=marcar">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idconsulta" id="idconsulta" >
-            
         <div class="form-group">
             <br>
             <br>
@@ -60,7 +59,6 @@
             </select>
         <br> 
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" type="hidden" value="<%= paciente.getId()%>">
-
         <div class="form-group">
             <label for="data"><b>Selecione a data</b></label>         
             <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="date" class="form-control" name="data" id="data" required>
@@ -75,7 +73,6 @@
         <div class="form-group">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="realizada" value = "N" id="realizada" >
         </div>
-        
         <button type="submit" class="btn btn-dark" style="margin-top: 30px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
      </div>
      </form>

@@ -188,26 +188,65 @@ public class ConsultaController extends HttpServlet {
                             RequestDispatcher error = getServletContext().getRequestDispatcher("/formConsulta.jsp");
                             error.forward(request, response);
                         } finally {
-                            ArrayList<Consulta> consultas;
-                            consultas = consultaDAO.getAll();
+                            ArrayList<Consulta> consultasmedico;
+                            Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
+                            consultasmedico = consultaDAO.getByMedico(medico.getId());
                             
-                            request.setAttribute("consultas", consultas);
+                            request.setAttribute("consultasMedico", consultasmedico);
                             RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
                             list.forward(request, response);
                         }
                         break;
                     
                 case "update":
-                        Consulta consultaa = new Consulta();
+                        try {
+                            Consulta consulta = new Consulta();
+                            if (request.getParameter("data").equals("")) {
+                                message = "'Data' is empty";
+                                request.setAttribute("error", 1);
+                            }
+                            if (request.getParameter("realizada").equals("")) {
+                                message = "'Realizada' is empty";
+                                request.setAttribute("error", 1);
+                            }
+                            if (request.getParameter("idmedico").equals("")) {
+                                message = "'IdMedico' is empty";
+                                request.setAttribute("error", 1);
+                            }
+                            if (request.getParameter("idpaciente").equals("")) {
+                                message = "'IdPaciente' is empty";
+                                request.setAttribute("error", 1);
+                            }
+                        
+                        if (message.equals("")) {
+                            consulta.setId(Integer.parseInt(request.getParameter("id")));
+                            consulta.setData(Date.format(request.getParameter("data"), "backToDatabase"));
+                            consulta.setDescricao(request.getParameter("descricao"));
+                            consulta.setRealizada(request.getParameter("realizada"));
+                            consulta.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
+                            consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
+                            
+                        if (consultaDAO.update(consulta)) {
+                            request.setAttribute("error", 0);
+                        } else {
+                            message = "Não Efetivado";
+                            request.setAttribute("error", 1);
+                        }
+                        } else {
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            System.out.println(message);
 
-                        consultaa.setId(Integer.parseInt(request.getParameter("id")));
-                        consultaa.setData(Date.format(request.getParameter("data"), "backToDatabase"));
-                        consultaa.setDescricao(request.getParameter("descricao"));
-                        consultaa.setRealizada(request.getParameter("realizada"));
-                        consultaa.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
-                        consultaa.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
-                        consultaDAO.update(consultaa);
-
+                            request.setAttribute("message", message);
+                            request.setAttribute("error", 1);
+                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarConsulta.jsp");
+                            error.forward(request, response);
+                        } 
+                        request.setAttribute("message", message);
+                        
+                    } catch (Exception e) {
+                        request.setAttribute("message", message);
+                        request.setAttribute("error", 1); 
+                    } finally {
                         ArrayList<Consulta> consultasmedico;
                         Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
                         consultasmedico = consultaDAO.getByMedico(medico.getId());
@@ -215,21 +254,21 @@ public class ConsultaController extends HttpServlet {
                         request.setAttribute("consultasMedico", consultasmedico);
                         RequestDispatcher list = getServletContext().getRequestDispatcher("/realizarConsulta.jsp");
                         list.forward(request, response);
-
+                    }
                     break;
                     
                 case "realizar":
                         ExameDAO exameDAO = new ExameDAO();
                         Exames exame = new Exames();
-                        Consulta consultaaa = new Consulta();
+                        Consulta consulta = new Consulta();
 
-                        consultaaa.setId(Integer.parseInt(request.getParameter("id")));
-                        consultaaa.setData(Date.format(request.getParameter("data"), "backToDatabase"));
-                        consultaaa.setDescricao(request.getParameter("descricao"));
-                        consultaaa.setRealizada(request.getParameter("realizada"));
-                        consultaaa.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
-                        consultaaa.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
-                        consultaDAO.update(consultaaa); 
+                        consulta.setId(Integer.parseInt(request.getParameter("id")));
+                        consulta.setData(Date.format(request.getParameter("data"), "backToDatabase"));
+                        consulta.setDescricao(request.getParameter("descricao"));
+                        consulta.setRealizada(request.getParameter("realizada"));
+                        consulta.setIdMedico(Integer.parseInt(request.getParameter("idmedico")));
+                        consulta.setIdPaciente(Integer.parseInt(request.getParameter("idpaciente")));
+                        consultaDAO.update(consulta); 
 
                         try {
                             String[] exames = request.getParameterValues("idtipoexame");
@@ -247,19 +286,18 @@ public class ConsultaController extends HttpServlet {
                             System.out.println(message);
 
                         request.setAttribute("message", message);
+                        request.setAttribute("error", 1);
 
                         } finally {
+                            ArrayList<Consulta> consultasmedico;
+                            Medico medico = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
+                            consultasmedico = consultaDAO.getByMedico(medico.getId());
 
-                            ArrayList<Consulta> consultasmedicoo;
-                            Medico medicoo = medicoDAO.get(Integer.parseInt(request.getParameter("idmedico")));
-                            consultasmedicoo = consultaDAO.getByMedico(medicoo.getId());
-
-                            request.setAttribute("consultasMedico", consultasmedicoo);
-                            RequestDispatcher listt = getServletContext().getRequestDispatcher("/realizarConsulta.jsp");
-                            listt.forward(request, response);
+                            request.setAttribute("consultasMedico", consultasmedico);
+                            RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaMedico.jsp");
+                            list.forward(request, response);
                         }
-                    break;
-    
+                        break;
             }   
     }
 }

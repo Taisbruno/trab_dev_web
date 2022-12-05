@@ -42,10 +42,10 @@
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="id" id="id" value="<%= consulta.getId() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idmedico" id="idmedico" value="<%= consulta.getIdMedico() %>">
         <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="idpaciente" id="idpaciente" value="<%= consulta.getIdPaciente() %>">
-        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>" >
+        <input type="hidden" style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" class="form-control" name="data" id="data" value="<%= consulta.getData() %>">
         <div class="form-group">
-            <label for="descricao"> <b>Descrição</b> </label>
-            <input style="width:300px; height: 60px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>" required>
+            <label for="descricao"> <b>Descrição</b></label>
+            <input style="width:300px; height: 60px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="descricao" id="descricao" autocomplete="off" placeholder="Digite a descrição" value="<%= consulta.getDescricao()%>">
         </div>
         <br>
         <div class="form-group">
@@ -70,7 +70,6 @@
                 <option value="S" selected> Sim </option> 
             </select>
         </div>
-            
         <button type="submit" class="btn btn-dark" style="margin-top: 50px; margin-bottom: 40px"><i class="fas fa-save"></i> Enviar </button>
      </form>
     </div>
