@@ -32,7 +32,7 @@
     <br>
     <br>
     <br>
-    <form method="POST" action="PacienteController?action=insert">
+    <form method="POST" action="PacienteController?action=insert_admin">
         <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idpaciente" id="idpaciente" >
         
         <div class="form-group">
