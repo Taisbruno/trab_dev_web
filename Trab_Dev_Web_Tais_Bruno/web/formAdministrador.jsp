@@ -19,7 +19,7 @@
     <br>
     <a class="btn btn-outline-dark my-2 my-sm-0" style="margin-bottom: 60px; text-align: center" href="cadastraAdministradores.jsp"><b>Voltar</b></a>
     <form method="POST" action="AdministradorController?action=insert">     
-        <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idadministrador" id="idadministrador" >
+        <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="hidden" class="form-control" name="idadministrador" id="idadministrador">
         <br>
         <br>
         <div class="form-group">

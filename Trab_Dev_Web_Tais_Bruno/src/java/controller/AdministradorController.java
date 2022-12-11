@@ -171,7 +171,7 @@ public class AdministradorController extends HttpServlet {
                         
                     } catch (Exception e) {
                         request.setAttribute("message", message);
-                        request.setAttribute("error", 1); 
+                        request.setAttribute("error", 1);
                     } finally {
                         ArrayList<Administrador> administradores;
                         administradores = administradorDAO.getAll();
