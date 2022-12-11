@@ -34,7 +34,7 @@
         <br>
         <div class="form-group">
             <label for="nome"><b> Nome </b></label>
-            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="nome" id="nome" autocomplete="off" placeholder="Digite o nome">
+            <input style="width:300px; display: block; margin-right: auto; margin-left: auto; text-align: center" type="text" class="form-control" name="nome" id="nome" autocomplete="off" placeholder="Digite o nome" required>
         </div>
         <br>
         <div class="form-group">

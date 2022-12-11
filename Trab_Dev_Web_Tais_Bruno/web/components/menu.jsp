@@ -18,9 +18,9 @@
                         <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="formPaciente.jsp">Cadastro - Paciente</a>
                         <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="loginMedico.jsp">Login - Médico</a>
                         <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="loginAdmin.jsp">Login - Administrador</a>
-                        <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="AreaAdministrador.jsp">Área do Administrador</a>
-                        <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="AreaMedico.jsp">Área do Médico</a>
                         <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="AreaPaciente.jsp">Área do Paciente</a>
+                        <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="AreaMedico.jsp">Área do Médico</a>
+                        <a class="btn btn-primary" style="margin-top: 10px; margin-right: 30px" href="AreaAdministrador.jsp">Área do Administrador</a>
                     </nav>
                 </div>
 </header>

@@ -137,8 +137,8 @@ public class AdministradorController extends HttpServlet {
                             message = "'Nome' is empty";
                             request.setAttribute("error", 1);
                         }
-                        if (request.getParameter("cpf").equals("") || request.getParameter("cpf").equals(administradorDAO.get(request.getParameter("cpf")).getCpf())) {
-                            message = "'Cpf' is empty or already exists";
+                        if (request.getParameter("cpf").equals("")) {
+                            message = "'Cpf' is empty";
                             request.setAttribute("error", 1);
                         }
                         if (request.getParameter("senha").equals("")) {
@@ -159,7 +159,7 @@ public class AdministradorController extends HttpServlet {
                             request.setAttribute("error", 1);
                         }
                         } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
                             System.out.println(message);
 
                             request.setAttribute("message", message);
