@@ -108,8 +108,8 @@ public class PacienteController extends HttpServlet {
                             message = "'Nome' is empty";
                             request.setAttribute("error", 1);
                         }
-                        if (request.getParameter("cpf").equals("")) {
-                            message = "'Cpf' is empty";
+                        if (request.getParameter("cpf").equals("") || request.getParameter("cpf").equals(pacienteDAO.get(request.getParameter("cpf")).getCpf())) {
+                            message = "'Cpf' is empty or already exists";
                             request.setAttribute("error", 1);
                         }
                         if (request.getParameter("senha").equals("")) {
@@ -139,7 +139,7 @@ public class PacienteController extends HttpServlet {
                             request.setAttribute("error", 1);
                         }
                         } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
                             System.out.println(message);
 
                             request.setAttribute("message", message);
@@ -150,7 +150,7 @@ public class PacienteController extends HttpServlet {
                         request.setAttribute("message", message);
             
                     } catch (Exception e) {
-                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
                         System.out.println(message);
 
                         request.setAttribute("message", message);
@@ -162,7 +162,7 @@ public class PacienteController extends HttpServlet {
                         pacientes = pacienteDAO.getAll();
                             
                         request.setAttribute("pacientes", pacientes);
-                        RequestDispatcher list = getServletContext().getRequestDispatcher("/cadastraPacientes.jsp");
+                        RequestDispatcher list = getServletContext().getRequestDispatcher("/AreaPaciente.jsp");
                         list.forward(request, response);
                         }
                     break;
@@ -174,8 +174,8 @@ public class PacienteController extends HttpServlet {
                             message = "'Nome' is empty";
                             request.setAttribute("error", 1);
                         }
-                        if (request.getParameter("cpf").equals("")) {
-                            message = "'Cpf' is empty";
+                       if (request.getParameter("cpf").equals("") || request.getParameter("cpf").equals(pacienteDAO.get(request.getParameter("cpf")).getCpf())) {
+                            message = "'Cpf' is empty or already exists";
                             request.setAttribute("error", 1);
                         }
                         if (request.getParameter("senha").equals("")) {
@@ -205,7 +205,7 @@ public class PacienteController extends HttpServlet {
                             request.setAttribute("error", 1);
                         }
                         } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
                             System.out.println(message);
 
                             request.setAttribute("message", message);
@@ -216,7 +216,7 @@ public class PacienteController extends HttpServlet {
                         request.setAttribute("message", message);
             
                     } catch (Exception e) {
-                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                        message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
                         System.out.println(message);
 
                         request.setAttribute("message", message);
@@ -240,8 +240,8 @@ public class PacienteController extends HttpServlet {
                             message = "'Nome' is empty";
                             request.setAttribute("error", 1);
                         }
-                        if (request.getParameter("cpf").equals("")) {
-                            message = "'Cpf' is empty";
+                        if (request.getParameter("cpf").equals("") || request.getParameter("cpf").equals(pacienteDAO.get(request.getParameter("cpf")).getCpf())) {
+                            message = "'Cpf' is empty or already exists";
                             request.setAttribute("error", 1);
                         }
                         if (request.getParameter("senha").equals("")) {
@@ -272,7 +272,7 @@ public class PacienteController extends HttpServlet {
                             request.setAttribute("error", 1);
                         }
                         } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / CPF já cadastrado no banco de dados";
                             System.out.println(message);
 
                             request.setAttribute("message", message);

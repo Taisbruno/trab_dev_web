@@ -97,8 +97,8 @@ public class EspecialidadeController extends HttpServlet {
                 case "insert":
                     try {
                         Especialidade especialidade = new Especialidade();
-                        if (request.getParameter("descricao").equals("")) {
-                            message = "'Descrição' is empty";
+                        if (request.getParameter("descricao").equals("") || request.getParameter("descricao").equals(especialidadeDAO.get(request.getParameter("descricao")).getDescricao())) {
+                        message = "'Descrição' is empty or already exists";
                             request.setAttribute("error", 1);
                         }
                         if (message.equals("")) {
@@ -111,18 +111,18 @@ public class EspecialidadeController extends HttpServlet {
                                 request.setAttribute("error", 1);
                             }
                             } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
-                            System.out.println(message);
+                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / Descrição já existente no banco de dados";
+                                System.out.println(message);
 
-                            request.setAttribute("message", message);
-                            request.setAttribute("error", 1);
-                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
-                            error.forward(request, response);
+                                request.setAttribute("message", message);
+                                request.setAttribute("error", 1);
+                                RequestDispatcher error = getServletContext().getRequestDispatcher("/formEspecialidade.jsp");
+                                error.forward(request, response);
                             }
                             request.setAttribute("message", message);
                         
                             } catch (Exception e) {
-                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
+                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / Descrição já existente no banco de dados";
                                 System.out.println(message);
 
                                 request.setAttribute("message", message);
@@ -143,8 +143,8 @@ public class EspecialidadeController extends HttpServlet {
                 case "update":
                     try {
                         Especialidade especialidade = new Especialidade();
-                        if (request.getParameter("descricao").equals("")) {
-                            message = "'Descrição' is empty";
+                        if (request.getParameter("descricao").equals("") || request.getParameter("descricao").equals(especialidadeDAO.get(request.getParameter("descricao")).getDescricao())) {
+                        message = "'Descrição' is empty or already exists";
                             request.setAttribute("error", 1);
                         }
                     
@@ -159,13 +159,13 @@ public class EspecialidadeController extends HttpServlet {
                                 request.setAttribute("error", 1);
                             }
                             } else {
-                            message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos";
-                            System.out.println(message);
+                                message = "É obrigatório o preenchimento de todos os campos / Dados inseridos inválidos / Descrição já existente no banco de dados";
+                                System.out.println(message);
 
-                            request.setAttribute("message", message);
-                            request.setAttribute("error", 1);
-                            RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarEspecialidade.jsp");
-                            error.forward(request, response);
+                                request.setAttribute("message", message);
+                                request.setAttribute("error", 1);
+                                RequestDispatcher error = getServletContext().getRequestDispatcher("/formEditarEspecialidade.jsp");
+                                error.forward(request, response);
                             }
                             request.setAttribute("message", message);
                             

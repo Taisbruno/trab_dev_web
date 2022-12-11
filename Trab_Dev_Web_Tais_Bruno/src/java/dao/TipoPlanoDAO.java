@@ -58,6 +58,22 @@ public class TipoPlanoDAO extends HttpServlet {
         return tipoplano;
     }
     
+    public TipoPlano get(String descricao) {
+        TipoPlano tipoplano = new TipoPlano();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + " WHERE descricao = '" + descricao + "'");
+            
+            if (resultSet.next()) {
+                tipoplano.setId(resultSet.getInt("id"));
+                tipoplano.setDescricao(resultSet.getString("descricao"));
+            }
+        } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return tipoplano;
+    }
+    
     public boolean insert(TipoPlano tipoplano) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 

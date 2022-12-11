@@ -58,6 +58,22 @@ public class EspecialidadeDAO extends HttpServlet {
         return especialidade;
     }
     
+    public Especialidade get(String descricao) {
+        Especialidade especialidade = new Especialidade();
+        try {
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + this.tableName + " WHERE descricao = '" + descricao + "'");
+            
+            if (resultSet.next()) {
+                especialidade.setId(resultSet.getInt("id"));
+                especialidade.setDescricao(resultSet.getString("descricao"));
+            }
+        } catch(SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+        return especialidade;
+    }
+    
     public boolean insert(Especialidade especialidade) {
         try {
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO " + 
